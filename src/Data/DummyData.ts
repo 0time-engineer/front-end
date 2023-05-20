@@ -1,3 +1,7 @@
+// いつでも変更して大丈夫です
+// ただし、何をどう変更したいのかをdiscodeで伝えて欲しいです
+// 他のコンポーネントで使用していることがあります
+
 export const MemberList = [
   {
     address: 'abcde@gmail.com',
