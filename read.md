@@ -14,3 +14,6 @@ yarn start で localhost:3000 が表示される
 
 - / Home 画面
 - /Components コンポーネントリスト
+
+### マージ
+ - 自分以外の1人が見たらできるようにする
