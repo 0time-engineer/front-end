@@ -7,7 +7,8 @@ import {
   Heading,
   VStack,
 } from '@chakra-ui/react'
-import { VSpacer, HSpacer } from 'Components/Spacer'
+import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
+import { TextBox } from 'Components/atoms/TextBox'
 export const Components = () => {
   return (
     <>
@@ -49,6 +50,16 @@ export const Components = () => {
               </HStack>
             </CardBody>
           </Card>
+
+          {/* TextBox */}
+          <VSpacer size={8} />
+          <Heading size="lg">TextBox</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <TextBox text={'アプリの名前'} />
+            </CardBody>
+          </Card>
+
           {/* 追加のテンプレート：消さないでね！！ */}
 
           {/* --------------------*/}
