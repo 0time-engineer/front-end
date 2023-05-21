@@ -21,7 +21,7 @@ export const SimpleButton = ({
   useEffect(() => {
     const link = document.createElement('link')
     link.href =
-      //TODO:aipのURL
+      //TODO:apiのURL
       link.rel = 'stylesheet'
     document.head.appendChild(link)
     return () => {
