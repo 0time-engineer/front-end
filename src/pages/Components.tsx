@@ -9,6 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
+import { SimpleButton } from 'Components/atoms/SimpleButton'
+
 export const Components = () => {
   return (
     <>
@@ -60,6 +62,17 @@ export const Components = () => {
             </CardBody>
           </Card>
 
+          {/* SimpleButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/SimpleButton</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <SimpleButton type={'google-icon'} text={''} isShadow={false} />
+              <Box boxSize={10}></Box>
+              <SimpleButton type="add-friends" text="追加" isShadow={false} />
+            </CardBody>
+          </Card>
+
           {/* 追加のテンプレート：消さないでね！！ */}
 
           {/* --------------------*/}
@@ -76,6 +89,9 @@ export const Components = () => {
               // ここに追加するコンポーネントを書く
             </CardBody>
           </Card> */}
+
+          {/* 見ずらいので下にボックスつけます */}
+          <Box boxSize={20}></Box>
         </Container>
       </VStack>
     </>
