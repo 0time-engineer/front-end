@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
+import { NavigationBar } from 'Components/atoms/NavigationBar'
 export const Components = () => {
   return (
     <>
@@ -18,6 +19,15 @@ export const Components = () => {
           <Heading size="lg" textAlign="center">
             Components Mock Storybook
           </Heading>
+
+          {/* NavigationBar */}
+          <VSpacer size={8} />
+          <Heading size="lg">NavigationBar</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <NavigationBar type="Home" />
+            </CardBody>
+          </Card>
 
           {/*  common/Spacer/VSpacer  */}
           <VSpacer size={8} />
