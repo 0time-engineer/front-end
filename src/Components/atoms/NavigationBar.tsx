@@ -1,4 +1,4 @@
-import { HStack, IconButton, ButtonGroup } from '@chakra-ui/react'
+import { IconButton, ButtonGroup } from '@chakra-ui/react'
 import { HiUserAdd, HiHome } from 'react-icons/hi'
 import { AiFillSetting } from 'react-icons/ai'
 import { useState } from 'react'
@@ -34,12 +34,13 @@ export const NavigationBar = ({ type }: Props) => {
         aria-label={type}
         icon={icon}
         color={color}
-        h={16}
+        h="64px"
         w="33.33%"
         variant="ghost"
-        fontSize="30px"
-        rounded="none"
+        fontSize="35px"
         borderColor="#000000"
+        borderX="none"
+        borderTop="none"
         borderBottomWidth={screen === type ? '5px' : '0px'}
         _hover={{ bg: '#A3A0A0' }}
         onClick={() => setScreen(type)}
@@ -49,13 +50,11 @@ export const NavigationBar = ({ type }: Props) => {
 
   return (
     <>
-      <HStack h={16} justify="center">
-        <ButtonGroup w="100%" bg="#C2BEBE" isAttached>
-          <ContentButton type="Home" />
-          <ContentButton type="AddFriend" />
-          <ContentButton type="Setting" />
-        </ButtonGroup>
-      </HStack>
+      <ButtonGroup w="100%" bg="#C2BEBE" isAttached>
+        <ContentButton type="Home" />
+        <ContentButton type="AddFriend" />
+        <ContentButton type="Setting" />
+      </ButtonGroup>
     </>
   )
 }
