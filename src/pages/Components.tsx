@@ -7,6 +7,7 @@ import {
   Heading,
   VStack,
 } from '@chakra-ui/react'
+import { Gmailwindow } from 'Components/atoms/Gmailwindow'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
@@ -20,6 +21,15 @@ export const Components = () => {
           <Heading size="lg" textAlign="center">
             Components Mock Storybook
           </Heading>
+
+          {/* Gmailwindow */}
+          <VSpacer size={8} />
+          <Heading size="lg">Gmailwindow</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <Gmailwindow placeholder={'Placeholder'} />
+            </CardBody>
+          </Card>
 
           {/*  common/Spacer/VSpacer  */}
           <VSpacer size={8} />
