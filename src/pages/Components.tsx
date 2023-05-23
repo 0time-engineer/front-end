@@ -28,7 +28,7 @@ export const Components = () => {
           <Heading size="lg">Gmailwindow</Heading>
           <Card variant="filled">
             <CardBody>
-              <Gmailwindow placeholder={'Placeholder'} />
+              <Gmailwindow placeholder={''} />
             </CardBody>
           </Card>
 
