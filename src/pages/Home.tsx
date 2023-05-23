@@ -1,7 +1,7 @@
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { VSpacer } from 'Components/atoms/Spacer'
 
-export const BB = () => {
+export const Home = () => {
   return (
     <>
       <VSpacer size={10} />
