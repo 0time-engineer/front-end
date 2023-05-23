@@ -10,6 +10,7 @@ import {
 import { Gmailwindow } from 'Components/atoms/Gmailwindow'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
+import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 
 export const Components = () => {
@@ -28,6 +29,15 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <Gmailwindow placeholder={'Placeholder'} />
+            </CardBody>
+          </Card>
+
+          {/* NavigationBar */}
+          <VSpacer size={8} />
+          <Heading size="lg">NavigationBar</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <NavigationBar type="Home" />
             </CardBody>
           </Card>
 
