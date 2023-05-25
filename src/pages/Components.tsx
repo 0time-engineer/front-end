@@ -2,6 +2,7 @@ import {
   Box,
   Card,
   CardBody,
+  ChakraProvider,
   Container,
   HStack,
   Heading,
@@ -10,6 +11,7 @@ import {
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
+import { WeekCalendar } from 'Components/molecules/WeekCalender'
 
 export const Components = () => {
   return (
@@ -70,6 +72,17 @@ export const Components = () => {
               <SimpleButton type={'google-icon'} text={''} isShadow={false} />
               <Box boxSize={10}></Box>
               <SimpleButton type="add-friends" text="追加" isShadow={false} />
+            </CardBody>
+          </Card>
+
+          {/* WeekCalender */}
+          <VSpacer size={8} />
+          <Heading size="lg">molecules/WeekCalender</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <ChakraProvider>
+                <WeekCalendar />
+              </ChakraProvider>
             </CardBody>
           </Card>
 
