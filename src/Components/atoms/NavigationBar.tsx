@@ -1,7 +1,8 @@
-import { IconButton, ButtonGroup } from '@chakra-ui/react'
+import { IconButton, Flex } from '@chakra-ui/react'
 import { HiUserAdd, HiHome } from 'react-icons/hi'
 import { AiFillSetting } from 'react-icons/ai'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   type: 'Home' | 'AddFriend' | 'Setting'
@@ -9,11 +10,14 @@ type Props = {
 
 export const NavigationBar = ({ type }: Props) => {
   const [screen, setScreen] = useState(type)
+  const navigation = useNavigate()
 
   const ContentButton = ({
     type,
+    link,
   }: {
     type: 'Home' | 'AddFriend' | 'Setting'
+    link: string
   }) => {
     const color = screen === type ? '#000000' : '#777777'
     //TODO: 型を変更する
@@ -35,26 +39,37 @@ export const NavigationBar = ({ type }: Props) => {
         icon={icon}
         color={color}
         h="64px"
-        w="33.33%"
-        variant="ghost"
+        rounded={'none'}
+        flex={1}
+        bg="#C2BEBE"
         fontSize="35px"
         borderColor="#000000"
-        borderX="none"
-        borderTop="none"
         borderBottomWidth={screen === type ? '5px' : '0px'}
         _hover={{ bg: '#A3A0A0' }}
-        onClick={() => setScreen(type)}
+        onClick={() => {
+          setScreen(type)
+          navigation(link)
+        }}
       />
     )
   }
 
   return (
     <>
-      <ButtonGroup w="100%" bg="#C2BEBE" isAttached>
-        <ContentButton type="Home" />
-        <ContentButton type="AddFriend" />
-        <ContentButton type="Setting" />
-      </ButtonGroup>
+      <Flex
+        width={'100%'}
+        position="fixed"
+        bottom={0}
+        left={0}
+        right={0}
+        height={16}
+        zIndex={9999}
+      >
+        <ContentButton type="Home" link="/Home" />
+        <ContentButton type="AddFriend" link="/AddFriend" />
+        {/* TODO: 設定画面への遷移に変更する */}
+        <ContentButton type="Setting" link="/Home" />
+      </Flex>
     </>
   )
 }
