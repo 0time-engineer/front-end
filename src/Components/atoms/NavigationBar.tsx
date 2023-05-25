@@ -63,6 +63,7 @@ export const NavigationBar = ({ type }: Props) => {
         left={0}
         right={0}
         height={16}
+        zIndex={9999}
       >
         <ContentButton type="Home" link="/Home" />
         <ContentButton type="AddFriend" link="/AddFriend" />
