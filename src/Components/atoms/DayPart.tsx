@@ -8,13 +8,13 @@ type props = {
 }
 
 export const DayPart = ({ day, rate, isSunday, isSaturday }: props) => {
-  const now = new Date()
-  const today = now.getDate()
+  const date = new Date()
+  const today = date.getDate()
 
-  //TODO: 何色にするかを決める
-  let color = ['#FFFFFF', '#D8F1FF', '#A6DFFF']
-  //TODO: 区切る値を決める
-  let separator = [30, 60]
+  //一日の空き具合を表す色
+  const color = ['#FFFFFF', '#D8F1FF', '#A6DFFF']
+  //色を切り替える割合
+  const separator = [30, 60]
 
   let bg
 
@@ -32,7 +32,7 @@ export const DayPart = ({ day, rate, isSunday, isSaturday }: props) => {
       <Circle
         size="30px"
         margin="2px"
-        bg={day === today ? '#707070' : 'transparent'}
+        bg={day === today ? '#707070' : ''}
         fontSize="15px"
         fontWeight="500"
         color={

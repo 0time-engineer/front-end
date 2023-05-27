@@ -1,17 +1,17 @@
 import { HStack } from '@chakra-ui/layout'
 import { DayPart } from 'Components/atoms/DayPart'
+import { MonthSchedule } from 'Data/DummyData'
 
 type props = {
   dayList: Array<number>
-  rateList: Array<number>
 }
 
-export const WeekPart = ({ dayList, rateList }: props) => {
-  const WeekComponent = Array.from({ length: 7 }, (_, index) => (
+export const WeekPart = ({ dayList }: props) => {
+  const WeekComponent = dayList.map((element, index) => (
     <DayPart
       key={index}
-      day={dayList[index]}
-      rate={rateList[index]}
+      day={element}
+      rate={element !== 0 ? MonthSchedule[element - 1] : 0}
       isSunday={index === 6 ? true : false}
       isSaturday={index === 0 ? true : false}
     />
