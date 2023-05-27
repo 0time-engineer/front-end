@@ -11,7 +11,7 @@ export const DayPart = ({ day, rate, isSunday, isSaturday }: props) => {
   const date = new Date()
   const today = date.getDate()
 
-  //一日の空き具合を表す色
+  //一日の空き具合を表す色（空き時間が多いほど濃い色で塗りつぶす）
   const color = ['#FFFFFF', '#D8F1FF', '#A6DFFF']
   //色を切り替える割合
   const separator = [30, 60]
