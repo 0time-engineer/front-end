@@ -15,7 +15,7 @@ import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { ScheduleCard } from 'Components/atoms/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
-import { MemberList } from 'Data/DummyData'
+import { MemberList, MonthSchedule } from 'Data/DummyData'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -112,7 +112,7 @@ export const Components = () => {
           <Heading size="lg">MonthCalendar</Heading>
           <Card variant="filled">
             <CardBody>
-              <MonthCalendar />
+              <MonthCalendar schedule={MonthSchedule} />
             </CardBody>
           </Card>
 
@@ -121,7 +121,11 @@ export const Components = () => {
           <Heading size="lg">templates/MonthScheduleCard</Heading>
           <Card variant="filled">
             <CardBody>
-              <MonthScheduleCard icon={userdata.src} username={userdata.name} />
+              <MonthScheduleCard
+                icon={userdata.src}
+                username={userdata.name}
+                schedule={MonthSchedule}
+              />
             </CardBody>
           </Card>
 

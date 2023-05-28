@@ -1,7 +1,11 @@
 import { VStack, Center, Text } from '@chakra-ui/layout'
 import { WeekPart } from 'Components/molecules/WeekPart'
 
-export const MonthCalendar = () => {
+type Props = {
+  schedule: Array<number>
+}
+
+export const MonthCalendar = ({ schedule }: Props) => {
   const date = new Date()
 
   //今月が何月か
@@ -26,7 +30,11 @@ export const MonthCalendar = () => {
 
   //一週間のコンポーネントの配列
   const MonthComponent = Array.from({ length: 5 }, (_, index) => (
-    <WeekPart key={index} dayList={dayList.slice(index * 7, index * 7 + 7)} />
+    <WeekPart
+      key={index}
+      dayList={dayList.slice(index * 7, index * 7 + 7)}
+      schedule={schedule}
+    />
   ))
 
   return (
