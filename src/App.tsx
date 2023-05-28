@@ -10,7 +10,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           {/* ログイン画面 */}
-          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           {/* 掲示板画面 */}
           <Route path="/Home" element={<Home />} />
           {/* フレンド追加画面 */}
