@@ -12,6 +12,7 @@ import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
+import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 
 export const Components = () => {
   return (
@@ -90,6 +91,15 @@ export const Components = () => {
               <SimpleButton type={'google-icon'} text={''} isShadow={false} />
               <Box boxSize={10}></Box>
               <SimpleButton type="add-friends" text="追加" isShadow={false} />
+            </CardBody>
+          </Card>
+
+          {/* MonthCalendar */}
+          <VSpacer size={8} />
+          <Heading size="lg">MonthCalendar</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MonthCalendar />
             </CardBody>
           </Card>
 
