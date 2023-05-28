@@ -13,8 +13,11 @@ import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
+import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
+import { MemberList } from 'Data/DummyData'
 
 export const Components = () => {
+  const userdata = MemberList[0]
   return (
     <>
       <VStack>
@@ -100,6 +103,15 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <MonthCalendar />
+            </CardBody>
+          </Card>
+
+          {/* MonthScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">templates/MonthScheduleCard</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MonthScheduleCard icon={userdata.src} username={userdata.name} />
             </CardBody>
           </Card>
 
