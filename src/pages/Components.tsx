@@ -12,6 +12,7 @@ import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
+import { WeekCalender } from 'Components/molecles/WeekCalender'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { ScheduleCard } from 'Components/organisms/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
@@ -148,6 +149,14 @@ export const Components = () => {
             </CardBody>
           </Card>
 
+          {/* SimpleButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">molecles/WeekCalender</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <WeekCalender />
+            </CardBody>
+          </Card>
           {/* 追加のテンプレート：消さないでね！！ */}
 
           {/* --------------------*/}
