@@ -13,9 +13,10 @@ import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
-import { ScheduleCard } from 'Components/atoms/ScheduleCard'
+import { ScheduleCard } from 'Components/organisms/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { MemberList, MonthSchedule } from 'Data/DummyData'
+import { MySchedule } from 'Components/molecules/MySchedule'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -46,9 +47,18 @@ export const Components = () => {
             </CardBody>
           </Card>
 
-          {/* atoms/ScheduleCard */}
+          {/* organisms/MySchedule */}
           <VSpacer size={8} />
-          <Heading size="lg">atoms/Schedulecard</Heading>
+          <Heading size="lg">organisms/MySchedule</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MySchedule icon={userdata.src} username={userdata.name} />
+            </CardBody>
+          </Card>
+
+          {/* organisms/ScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">organisms/Schedulecard</Heading>
           <Card variant="filled">
             <CardBody>
               <ScheduleCard icon={userdata.src} username={userdata.name} />
