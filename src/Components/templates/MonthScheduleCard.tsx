@@ -7,9 +7,10 @@ import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 type Props = {
   icon: string
   username: string
+  schedule: Array<number>
 }
 
-export const MonthScheduleCard = ({ icon, username }: Props) => {
+export const MonthScheduleCard = ({ icon, username, schedule }: Props) => {
   return (
     <>
       <Card
@@ -27,7 +28,7 @@ export const MonthScheduleCard = ({ icon, username }: Props) => {
             <HSpacer size={6} />
           </HStack>
           <VSpacer size={1} />
-          <MonthCalendar />
+          <MonthCalendar schedule={schedule} />
         </VStack>
       </Card>
     </>
