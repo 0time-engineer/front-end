@@ -13,8 +13,14 @@ import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { WeekCalender } from 'Components/molecles/WeekCalender'
+import { MonthCalendar } from 'Components/organisms/MonthCalendar'
+import { ScheduleCard } from 'Components/organisms/ScheduleCard'
+import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
+import { MemberList, MonthSchedule } from 'Data/DummyData'
+import { MySchedule } from 'Components/molecules/MySchedule'
 
 export const Components = () => {
+  const userdata = MemberList[0]
   return (
     <>
       <VStack>
@@ -39,6 +45,30 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <NavigationBar type="Home" />
+            </CardBody>
+          </Card>
+
+          {/* organisms/MySchedule */}
+          <VSpacer size={8} />
+          <Heading size="lg">organisms/MySchedule</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MySchedule icon={userdata.src} username={userdata.name} />
+            </CardBody>
+          </Card>
+
+          {/* organisms/ScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">organisms/Schedulecard</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <ScheduleCard
+                icon={userdata.src}
+                username={userdata.name}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
             </CardBody>
           </Card>
 
@@ -91,6 +121,31 @@ export const Components = () => {
               <SimpleButton type={'google-icon'} text={''} isShadow={false} />
               <Box boxSize={10}></Box>
               <SimpleButton type="add-friends" text="追加" isShadow={false} />
+            </CardBody>
+          </Card>
+
+          {/* MonthCalendar */}
+          <VSpacer size={8} />
+          <Heading size="lg">MonthCalendar</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MonthCalendar schedule={MonthSchedule} />
+            </CardBody>
+          </Card>
+
+          {/* MonthScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">templates/MonthScheduleCard</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MonthScheduleCard
+                icon={userdata.src}
+                username={userdata.name}
+                schedule={MonthSchedule}
+                onClose={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
             </CardBody>
           </Card>
 
