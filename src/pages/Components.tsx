@@ -61,7 +61,13 @@ export const Components = () => {
           <Heading size="lg">organisms/Schedulecard</Heading>
           <Card variant="filled">
             <CardBody>
-              <ScheduleCard icon={userdata.src} username={userdata.name} />
+              <ScheduleCard
+                icon={userdata.src}
+                username={userdata.name}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
             </CardBody>
           </Card>
 
@@ -135,6 +141,9 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 schedule={MonthSchedule}
+                onClose={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             </CardBody>
           </Card>

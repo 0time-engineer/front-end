@@ -4,15 +4,17 @@ import './index.css'
 
 import reportWebVitals from './reportWebVitals'
 import { App } from 'App'
-import { ChakraProvider, Container } from '@chakra-ui/react'
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <Container maxW="container.md">
-        <App />
-      </Container>
+      <Flex flexDirection="column" minHeight="100vh" bg="#f2f2f2">
+        <Container maxW="container.md">
+          <App />
+        </Container>
+      </Flex>
     </ChakraProvider>
   </React.StrictMode>,
 )

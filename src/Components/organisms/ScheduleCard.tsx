@@ -4,11 +4,13 @@ import { MySchedule } from 'Components/molecules/MySchedule'
 type Props = {
   icon: string
   username: string
+  onClick: () => void
 }
-export const ScheduleCard = ({ icon, username }: Props) => {
+
+export const ScheduleCard = ({ icon, username, onClick }: Props) => {
   return (
     <>
-      <Card maxW="md">
+      <Card maxW="100%" onClick={onClick}>
         <MySchedule icon={icon} username={username} />
       </Card>
     </>

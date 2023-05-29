@@ -1,6 +1,6 @@
-import { Card } from '@chakra-ui/card'
-import { HStack, VStack, Text } from '@chakra-ui/layout'
-import { Image } from '@chakra-ui/image'
+import { Card } from '@chakra-ui/react'
+import { HStack, VStack, Text } from '@chakra-ui/react'
+import { Image } from '@chakra-ui/react'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 
@@ -8,6 +8,7 @@ type Props = {
   icon: string
   username: string
   schedule: Array<number>
+  onClose: () => void
 }
 
 export const MonthScheduleCard = ({ icon, username, schedule }: Props) => {
