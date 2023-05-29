@@ -12,7 +12,7 @@ export const App = () => {
           {/* ログイン画面 */}
           <Route path="/" element={<Login />} />
           {/* 掲示板画面 */}
-          <Route path="/Home" element={<Home />} />
+          <Route path="/Home" element={<Home icon={''} username={''} />} />
           {/* フレンド追加画面 */}
           <Route path="/AddFriend" element={<AddFriend />} />
           {/* コンポーネント確認用ページ */}
