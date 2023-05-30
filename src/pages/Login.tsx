@@ -1,4 +1,4 @@
-import { Center } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { VSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
@@ -8,11 +8,17 @@ export const Login = () => {
     <>
       <VSpacer size={10} />
       <VSpacer size={24} />
-      <VSpacer size={24} />
-      <TextBox text={'App'} />
-      <VSpacer size={64} />
+      <VSpacer size={12} />
       <Center>
-        <SimpleButton type={'google-icon'} text={''} isShadow={false} />
+        <Box bg="white" width="80%" boxShadow="2xl" rounded="xl">
+          <VSpacer size={12} />
+          <TextBox text={'App'} />
+          <VSpacer size={64} />
+          <Center>
+            <SimpleButton type={'google-icon'} text={''} isShadow={false} />
+          </Center>
+          <VSpacer size={12} />
+        </Box>
       </Center>
     </>
   )

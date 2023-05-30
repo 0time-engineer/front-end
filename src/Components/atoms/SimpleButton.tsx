@@ -49,7 +49,7 @@ export const SimpleButton = ({
         {type === 'add-friends' && (
           <Text className="simple-button">{text}</Text>
         )}
-        {type === 'google-icon' && <Icon as={BsGoogle} w={20} h={20} />}
+        {type === 'google-icon' && <Icon as={BsGoogle} w={10} h={10} />}
       </Button>
     </>
   )
