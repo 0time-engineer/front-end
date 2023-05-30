@@ -1,4 +1,5 @@
 import { VStack, Center, Text } from '@chakra-ui/layout'
+import { Container } from '@chakra-ui/react'
 import { WeekPart } from 'Components/molecules/WeekPart'
 
 type Props = {
@@ -39,12 +40,14 @@ export const MonthCalendar = ({ schedule }: Props) => {
 
   return (
     <>
-      <Text fontSize="20px" fontWeight="bold" textAlign="right" w="253px">
-        {thisMonth}月
-      </Text>
-      <Center w="253px" h="481px" bg="#AAAAAA">
-        <VStack spacing="1px">{MonthComponent}</VStack>
-      </Center>
+      <Container maxW="md">
+        <Text fontSize="20px" fontWeight="bold" textAlign="right">
+          {thisMonth}月
+        </Text>
+        <Center bg="whitesmoke" right={0}>
+          <VStack spacing="1px">{MonthComponent}</VStack>
+        </Center>
+      </Container>
     </>
   )
 }
