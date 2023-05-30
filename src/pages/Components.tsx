@@ -12,9 +12,9 @@ import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
-import { WeekCalender } from 'Components/molecules/WeekCalender'
+import { WeekCalender } from 'Components/organisms/WeekCalender'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
-import { ScheduleCard } from 'Components/organisms/ScheduleCard'
+import { ScheduleCard } from 'Components/templates/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { MemberList, MonthSchedule } from 'Data/DummyData'
 import { MySchedule } from 'Components/molecules/MySchedule'
@@ -151,7 +151,7 @@ export const Components = () => {
 
           {/* SimpleButton */}
           <VSpacer size={8} />
-          <Heading size="lg">molecles/WeekCalender</Heading>
+          <Heading size="lg">organisms/WeekCalender</Heading>
           <Card variant="filled">
             <CardBody>
               <WeekCalender />
