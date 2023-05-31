@@ -62,7 +62,7 @@ export const DayCell = ({ day, work }: Props) => {
             key={index}
             width="100%"
             height="2px"
-            bg={value ? 'blue' : 'white'}
+            bg={value ? '#A6DFFF' : 'white'}
           />
         ))}
       </Stack>

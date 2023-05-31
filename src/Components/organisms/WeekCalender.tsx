@@ -10,11 +10,11 @@ export const WeekCalender = () => {
           <Box height={'3px'}></Box>
           {Array.from(Array(24 / 12).keys()).map((interval) => (
             <Text fontSize="xs" color="gray" textAlign="center">
-              {interval * 12}:00-
+              {interval * 12}-
             </Text>
           ))}
           <Text fontSize="xs" color="gray" textAlign="center">
-            24:00-
+            24-
           </Text>
         </Stack>
         {WeekTF.map((data) => (
