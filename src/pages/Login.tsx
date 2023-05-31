@@ -13,6 +13,7 @@ const getInfo = () => {
     .catch((error) => {
       console.log(error)
     })
+  window.location.href = 'http://localhost:8080/login'
 }
 
 export const Login = () => {

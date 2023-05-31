@@ -3,9 +3,10 @@ import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { VSpacer } from 'Components/atoms/Spacer'
 import { MySchedule } from 'Components/molecules/MySchedule'
 import { ScheduleCard } from 'Components/organisms/ScheduleCard'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Friend } from 'Data/DummyData'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
+import { useLocation } from 'react-router'
 
 type Props = {
   icon: string
@@ -13,6 +14,16 @@ type Props = {
 }
 
 export const Home = ({ icon, username }: Props) => {
+  const location = useLocation()
+  useEffect(() => {
+    const search = location.search
+    const query = new URLSearchParams(search)
+    const queryUserId = query.get('user_id')
+    if (queryUserId != null) {
+      localStorage.setItem('user_id', queryUserId)
+    }
+  }, [])
+
   const num = Friend
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null,
