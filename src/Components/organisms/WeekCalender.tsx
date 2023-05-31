@@ -6,32 +6,16 @@ export const WeekCalender = () => {
   return (
     <>
       <HStack>
-        <Stack>
-          {Array.from(Array(24 / 6).keys()).map((interval) => (
-            <Box
-              key={interval}
-              width="100%"
-              height="100%"
-              bg="transparent"
-              border="1px solid gray"
-              marginRight="0.5"
-            >
-              <Text fontSize="xs" color="gray" textAlign="center">
-                {interval * 6}:00
-              </Text>
-            </Box>
-          ))}
-          <Box
-            width="100%"
-            height="100%"
-            bg="transparent"
-            border="1px solid gray"
-            marginRight="0.5"
-          >
+        <Stack spacing={1.5}>
+          <Box height={'3px'}></Box>
+          {Array.from(Array(24 / 12).keys()).map((interval) => (
             <Text fontSize="xs" color="gray" textAlign="center">
-              24:00
+              {interval * 12}:00-
             </Text>
-          </Box>
+          ))}
+          <Text fontSize="xs" color="gray" textAlign="center">
+            24:00-
+          </Text>
         </Stack>
         {WeekTF.map((data) => (
           //TODO:縦の幅を調節する!何故か隙間が空く!!
