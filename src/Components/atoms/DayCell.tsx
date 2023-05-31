@@ -56,13 +56,13 @@ export const DayCell = ({ day, work }: Props) => {
       <Text color="gray" fontSize="xs" style={dayStyles} borderRadius={'full'}>
         <Center>{date}</Center>
       </Text>
-      <Stack>
+      <Stack spacing={0}>
         {work.map((value, index) => (
           <Box
             key={index}
             width="100%"
             height="2px"
-            bg={value ? 'blue' : 'white'}
+            bg={value ? '#A6DFFF' : 'white'}
           />
         ))}
       </Stack>
