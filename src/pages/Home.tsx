@@ -4,7 +4,6 @@ import { VSpacer } from 'Components/atoms/Spacer'
 import { MySchedule } from 'Components/molecules/MySchedule'
 import { ScheduleCard } from 'Components/templates/ScheduleCard'
 import { useState, useEffect } from 'react'
-import { Friend } from 'Data/DummyData'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
@@ -25,7 +24,6 @@ export const Home = ({ icon, username }: Props) => {
     }
   }, [])
 
-  const num = Friend
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null,
   )
@@ -56,6 +54,24 @@ export const Home = ({ icon, username }: Props) => {
       })
   }, [])
 
+  //フレンドリストを取得
+  const [FriendList, setFriendList] = useState<any>(null)
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/friend_list?my_mail=${localStorage.getItem(
+          'user_id',
+        )}`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        setFriendList(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   return (
     <>
       {/* 自分のスケジュールのヘッダー */}
@@ -76,40 +92,42 @@ export const Home = ({ icon, username }: Props) => {
         </Box>
       </Flex>
       <VSpacer size={32} />
-      {Array.from({ length: num }).map((_, index) => (
-        <Box key={index} position="relative">
-          {/* 友達のスケジュールカード */}
-          <ScheduleCard
-            icon={icon}
-            username={username}
-            onClick={() => handleScheduleCardClick(index)}
-          />
-          {selectedCardIndex === index && (
-            // 友達の月カレンダーの表示
-            <Flex
-              position="fixed"
-              top={10}
-              left={0}
-              right={-5}
-              bottom={0}
-              bg="whiteAlpha.800"
-              boxShadow="xl"
-              zIndex={10}
-              direction="row"
-              onClick={handleOutsideClick}
-            >
-              <Spacer />
-              <MonthScheduleCard
-                icon={icon}
-                username={username}
-                schedule={[1, 2, 3]}
-                onClose={() => setSelectedCardIndex(null)}
-              />
-            </Flex>
-          )}
-          <VSpacer size={4} />
-        </Box>
-      ))}
+      {Array.from({ length: FriendList ? FriendList.length : 0 }).map(
+        (_, index) => (
+          <Box key={index} position="relative">
+            {/* 友達のスケジュールカード */}
+            <ScheduleCard
+              icon={FriendList[index].icon}
+              username={FriendList[index].name}
+              onClick={() => handleScheduleCardClick(index)}
+            />
+            {selectedCardIndex === index && (
+              // 友達の月カレンダーの表示
+              <Flex
+                position="fixed"
+                top={10}
+                left={0}
+                right={-5}
+                bottom={0}
+                bg="whiteAlpha.800"
+                boxShadow="xl"
+                zIndex={10}
+                direction="row"
+                onClick={handleOutsideClick}
+              >
+                <Spacer />
+                <MonthScheduleCard
+                  icon={icon}
+                  username={username}
+                  schedule={[1, 2, 3]}
+                  onClose={() => setSelectedCardIndex(null)}
+                />
+              </Flex>
+            )}
+            <VSpacer size={4} />
+          </Box>
+        ),
+      )}
       <NavigationBar type="Home" />
     </>
   )
