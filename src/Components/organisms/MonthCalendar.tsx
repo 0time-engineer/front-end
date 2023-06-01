@@ -16,39 +16,16 @@ export const MonthCalendar = ({ schedule }: Props) => {
   //今日が何曜日か
   const dayOfWeek = date.getDay()
 
-  //今月が何月か
-  const thisMonth = date.getMonth()
-
-  //今月の日数
-  date.setMonth(thisMonth + 1)
-  date.setDate(0)
-  const daysInMonth = date.getDate()
-
-  //翌月の日数
-  date.setMonth(thisMonth + 2)
-  date.setDate(0)
-  const daysInNextMonth = date.getDate()
-
-  //WeekPartに渡す配列
-  const firstBlank = Array(dayOfWeek).fill(0)
-
   //日付の配列の処理
-  const dayList = Array.from(
-    { length: daysInMonth - today + 1 },
-    (_, index) => index + today,
-  )
-  const nextDayList = Array.from(
-    { length: daysInNextMonth },
-    (_, index) => index + 1,
-  )
-  dayList.unshift(...firstBlank)
-  dayList.push(...nextDayList)
-  if (35 - dayList.length > 0) {
-    const lastBlank = Array(35 - dayList.length)
-    dayList.push(...lastBlank)
+  date.setDate(today - dayOfWeek)
+  let dayList = new Array<number>()
+  for (let i = 0; i < 35; i++) {
+    dayList.push(date.getDate())
+    date.setDate(date.getDate() + 1)
   }
 
   //スケジュールの配列の処理
+  const firstBlank = Array(dayOfWeek).fill(0)
   copiedSchedule.unshift(...firstBlank)
   if (35 - copiedSchedule.length > 0) {
     const lastBlank = Array(35 - copiedSchedule.length)

@@ -6,6 +6,7 @@ type props = {
   isSunday: boolean
   isSaturday: boolean
   isToday: boolean
+  isFinished: boolean
 }
 
 export const DayPart = ({
@@ -14,8 +15,8 @@ export const DayPart = ({
   isSunday,
   isSaturday,
   isToday,
+  isFinished,
 }: props) => {
-  console.log(rate)
   //一日の空き具合を表す色（空き時間が多いほど濃い色で塗りつぶす）
   const color = ['#FFFFFF', '#D8F1FF', '#A6DFFF']
   //色を切り替える割合
@@ -50,7 +51,7 @@ export const DayPart = ({
             : ''
         }
       >
-        {day > 0 ? day : ''}
+        {day}
       </Circle>
     )
   }
@@ -60,7 +61,7 @@ export const DayPart = ({
       <VStack
         w="35px"
         h="95px"
-        bg={day > 0 ? bg : '#DDDDDD'}
+        bg={isFinished ? '#DDDDDD' : bg}
         color={isSunday ? '#FF2B2B' : isSaturday ? '2B80FF' : ''}
       >
         <DateComponent />
