@@ -64,31 +64,13 @@ export const Home = ({ icon, username }: Props) => {
         )}`,
       )
       .then((response) => {
-        console.log('FriendList: ' + response.data)
+        console.log(response.data)
         setFriendList(response.data)
       })
       .catch((error) => {
         console.log(error)
       })
   }, [])
-
-  //フレンドのデータを取得
-  const [FriendData, setFriendData] = useState<any>([])
-  useEffect(() => {
-    if (FriendList !== null) {
-      FriendList.forEach((element: string) => {
-        axios
-          .get(`http://localhost:8080/user_detail?user_id=${element}`)
-          .then((response) => {
-            console.log('FriendData: ' + response.data)
-            setFriendData([...FriendData, response.data])
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      })
-    }
-  }, FriendList)
 
   return (
     <>
@@ -110,13 +92,13 @@ export const Home = ({ icon, username }: Props) => {
         </Box>
       </Flex>
       <VSpacer size={32} />
-      {Array.from({ length: FriendData ? FriendData.length : 0 }).map(
+      {Array.from({ length: FriendList ? FriendList.length : 0 }).map(
         (_, index) => (
           <Box key={index} position="relative">
             {/* 友達のスケジュールカード */}
             <ScheduleCard
-              icon={FriendData[index].picture}
-              username={FriendData[index].given_name}
+              icon={FriendList[index].icon}
+              username={FriendList[index].name}
               onClick={() => handleScheduleCardClick(index)}
             />
             {selectedCardIndex === index && (
