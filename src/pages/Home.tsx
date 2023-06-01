@@ -53,23 +53,42 @@ export const Home = ({ icon, username }: Props) => {
         console.log(error)
       })
   }, [])
-  //フレンドのデータを取得
-  const [FriendData, setFriendData] = useState<any>(null)
+
+  //フレンドリストを取得
+  const [FriendList, setFriendList] = useState<any>(null)
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/user_detail?friend_list=${localStorage.getItem(
-          'my_mail',
+        `http://localhost:8080/friend_list?my_mail=${localStorage.getItem(
+          'user_id',
         )}`,
       )
       .then((response) => {
-        console.log(response.data)
-        setFriendData(response.data)
+        console.log('FriendList: ' + response.data)
+        setFriendList(response.data)
       })
       .catch((error) => {
         console.log(error)
       })
   }, [])
+
+  //フレンドのデータを取得
+  const [FriendData, setFriendData] = useState<any>([])
+  useEffect(() => {
+    if (FriendList !== null) {
+      FriendList.forEach((element: string) => {
+        axios
+          .get(`http://localhost:8080/user_detail?user_id=${element}`)
+          .then((response) => {
+            console.log('FriendData: ' + response.data)
+            setFriendData([...FriendData, response.data])
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      })
+    }
+  }, FriendList)
 
   return (
     <>
@@ -96,8 +115,8 @@ export const Home = ({ icon, username }: Props) => {
           <Box key={index} position="relative">
             {/* 友達のスケジュールカード */}
             <ScheduleCard
-              icon={icon}
-              username={username}
+              icon={FriendData[index].picture}
+              username={FriendData[index].given_name}
               onClick={() => handleScheduleCardClick(index)}
             />
             {selectedCardIndex === index && (
