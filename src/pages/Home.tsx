@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Friend } from 'Data/DummyData'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
+import axios from 'axios'
 
 type Props = {
   icon: string
@@ -38,6 +39,38 @@ export const Home = ({ icon, username }: Props) => {
   const handleClickInside = () => {
     setSelectedCardIndex(null)
   }
+
+  const [myData, setMyData] = useState<any>(null)
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/user_detail?user_id=${localStorage.getItem(
+          'user_id',
+        )}`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        setMyData(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/month_calender?user_id=${localStorage.getItem(
+          'user_id',
+        )}`,
+      )
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <>
@@ -76,9 +109,9 @@ export const Home = ({ icon, username }: Props) => {
               onClick={handleClickInside}
             >
               <MonthScheduleCard
-                icon={icon}
-                username={username}
-                schedule={[1, 2, 3]}
+                icon={myData === null ? '' : myData.picture}
+                username={myData === null ? 'Loading...' : myData.given_name}
+                schedule={myData === null ? [] : myData}
                 onClose={() => setSelectedCardIndex(null)}
               />
             </Box>
