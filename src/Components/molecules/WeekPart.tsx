@@ -3,15 +3,15 @@ import { DayPart } from 'Components/atoms/DayPart'
 
 type props = {
   dayList: Array<number>
-  schedule: Array<number>
+  scheduleList: Array<number>
 }
 
-export const WeekPart = ({ dayList, schedule }: props) => {
+export const WeekPart = ({ dayList, scheduleList }: props) => {
   const WeekComponent = dayList.map((element, index) => (
     <DayPart
       key={index}
       day={element}
-      rate={element !== 0 ? schedule[element - 1] : 0}
+      rate={element !== 0 ? scheduleList[element - 1] : 0}
       isSunday={index === 6 ? true : false}
       isSaturday={index === 0 ? true : false}
     />
