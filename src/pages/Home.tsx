@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { Friend } from 'Data/DummyData'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
+import axios from 'axios'
 
 type Props = {
   icon: string
@@ -37,6 +38,24 @@ export const Home = ({ icon, username }: Props) => {
     setSelectedCardIndex(null)
   }
 
+  //自分のデータを取得
+  const [myData, setMyData] = useState<any>(null)
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/user_detail?user_id=${localStorage.getItem(
+          'user_id',
+        )}`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        setMyData(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   return (
     <>
       {/* 自分のスケジュールのヘッダー */}
@@ -50,7 +69,10 @@ export const Home = ({ icon, username }: Props) => {
         boxShadow="xl"
       >
         <Box width="100%">
-          <MySchedule icon={icon} username={username} />
+          <MySchedule
+            icon={myData === null ? '' : myData.picture}
+            username={myData === null ? 'Loading...' : myData.given_name}
+          />
         </Box>
       </Flex>
       <VSpacer size={32} />
