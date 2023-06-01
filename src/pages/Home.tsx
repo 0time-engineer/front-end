@@ -56,7 +56,7 @@ export const Home = ({ icon, username }: Props) => {
       .catch((error) => {
         console.log(error)
       })
-  })
+  }, [])
 
   return (
     <>
@@ -71,7 +71,10 @@ export const Home = ({ icon, username }: Props) => {
         boxShadow="xl"
         marginBottom={40}
       >
-        <MySchedule icon={myData.picture} username={myData.given_name} />
+        <MySchedule
+          icon={myData === null ? '' : myData.picture}
+          username={myData === null ? 'Loading...' : myData.given_name}
+        />
       </Flex>
       <VSpacer size={24} />
       {Array.from({ length: num }).map((_, index) => (
