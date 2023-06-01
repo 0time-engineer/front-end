@@ -7,6 +7,7 @@ import {
   Heading,
   VStack,
 } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 import { Gmailwindow } from 'Components/atoms/Gmailwindow'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
@@ -18,9 +19,12 @@ import { ScheduleCard } from 'Components/templates/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { MemberList, MonthSchedule } from 'Data/DummyData'
 import { MySchedule } from 'Components/molecules/MySchedule'
+import { FilterButton } from 'Components/atoms/FilterButton'
+import { useState } from 'react'
 
 export const Components = () => {
   const userdata = MemberList[0]
+  const [filter, setFilter] = useState<boolean>(false)
   return (
     <>
       <VStack>
@@ -29,6 +33,16 @@ export const Components = () => {
           <Heading size="lg" textAlign="center">
             Components Mock Storybook
           </Heading>
+
+          {/* FilterButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">FilterButton</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <FilterButton filter={filter} setFilter={setFilter} />
+              {filter ? <Text>あいうえお</Text> : <Text>かきくけこ</Text>}
+            </CardBody>
+          </Card>
 
           {/* Gmailwindow */}
           <VSpacer size={8} />
