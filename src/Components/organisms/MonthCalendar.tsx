@@ -7,6 +7,7 @@ type Props = {
 }
 
 export const MonthCalendar = ({ schedule }: Props) => {
+  const copiedSchedule = schedule.slice()
   const date = new Date()
 
   //今日が何日か
@@ -16,52 +17,58 @@ export const MonthCalendar = ({ schedule }: Props) => {
   const dayOfWeek = date.getDay()
 
   //今月が何月か
-  const thisMonth = date.getMonth() + 1
+  const thisMonth = date.getMonth()
 
-  //今月が何日まであるか
-  date.setMonth(thisMonth)
+  //今月の日数
+  date.setMonth(thisMonth + 1)
   date.setDate(0)
   const daysInMonth = date.getDate()
 
-  //翌月が何日まであるか
-  date.setMonth(thisMonth)
+  //翌月の日数
+  date.setMonth(thisMonth + 2)
+  date.setDate(0)
   const daysInNextMonth = date.getDate()
 
   //WeekPartに渡す配列
   const firstBlank = Array(dayOfWeek).fill(0)
-  // const lastBlank = Array(35 - (dayOfWeek + daysInMonth)).fill(0)
 
+  //日付の配列の処理
   const dayList = Array.from(
-    { length: daysInMonth - today },
+    { length: daysInMonth - today + 1 },
     (_, index) => index + today,
   )
   const nextDayList = Array.from(
-    { length: daysInNextMonth - dayList.length },
+    { length: daysInNextMonth },
     (_, index) => index + 1,
   )
-
-  //日付の配列の処理
   dayList.unshift(...firstBlank)
   dayList.push(...nextDayList)
+  if (35 - dayList.length > 0) {
+    const lastBlank = Array(35 - dayList.length)
+    dayList.push(...lastBlank)
+  }
 
   //スケジュールの配列の処理
-  schedule.unshift(...firstBlank)
+  copiedSchedule.unshift(...firstBlank)
+  if (35 - copiedSchedule.length > 0) {
+    const lastBlank = Array(35 - copiedSchedule.length)
+    dayList.push(...lastBlank)
+  }
 
   //一週間のコンポーネントの配列
   const MonthComponent = Array.from({ length: 5 }, (_, index) => (
     <WeekPart
       key={index}
-      dayList={dayList.slice(index * 7, index * 7 + 7)}
-      scheduleList={schedule.slice(index * 7, index * 7 + 7)}
+      dayList={dayList.slice(index * 7, (index + 1) * 7)}
+      scheduleList={copiedSchedule.slice(index * 7, (index + 1) * 7)}
+      row={index}
     />
   ))
 
   return (
     <>
       <Container maxW="md">
-        <Text fontSize="20px" fontWeight="bold" textAlign="right">
-          {thisMonth}月
-        </Text>
+        <Text fontSize="20px" fontWeight="bold" textAlign="right"></Text>
         <Center bg="whitesmoke" right={0}>
           <VStack spacing="1px">{MonthComponent}</VStack>
         </Center>
