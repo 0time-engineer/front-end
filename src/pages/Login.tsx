@@ -37,7 +37,6 @@ export const Login = () => {
           </Center>
           <VSpacer size={12} />
         </Box>
-
       </Center>
     </>
   )

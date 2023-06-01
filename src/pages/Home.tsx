@@ -1,9 +1,9 @@
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, Spacer } from '@chakra-ui/react'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { VSpacer } from 'Components/atoms/Spacer'
 import { MySchedule } from 'Components/molecules/MySchedule'
 import { ScheduleCard } from 'Components/templates/ScheduleCard'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Friend } from 'Data/DummyData'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
@@ -29,64 +29,66 @@ export const Home = ({ icon, username }: Props) => {
     null,
   )
 
-  const monthScheduleCardRef = useRef<HTMLDivElement>(null)
-
   const handleScheduleCardClick = (index: number) => {
     setSelectedCardIndex(index === selectedCardIndex ? null : index)
   }
 
-  const handleClickInside = () => {
+  const handleOutsideClick = () => {
     setSelectedCardIndex(null)
   }
 
   return (
     <>
+      {/* 自分のスケジュールのヘッダー */}
       <VSpacer size={10} />
       <Flex
         position="fixed"
-        top={0}
+        top={10}
         left={0}
         right={0}
-        zIndex={10}
         bg="whiteAlpha.800"
         boxShadow="xl"
-        marginBottom={40}
       >
-        <MySchedule icon={icon} username={username} />
+        <Box width="100%">
+          <MySchedule icon={icon} username={username} />
+        </Box>
       </Flex>
-      <VSpacer size={24} />
+      <VSpacer size={32} />
       {Array.from({ length: num }).map((_, index) => (
         <Box key={index} position="relative">
+          {/* 友達のスケジュールカード */}
           <ScheduleCard
             icon={icon}
             username={username}
             onClick={() => handleScheduleCardClick(index)}
           />
           {selectedCardIndex === index && (
-            <Box
+            // 友達の月カレンダーの表示
+            <Flex
               position="fixed"
-              top={8}
-              left={12}
-              zIndex={20}
-              width="100%"
-              height="100%"
-              boxShadow="dark-lg"
-              borderRadius={'30px 0px 0px 30px'}
-              ref={monthScheduleCardRef}
-              onClick={handleClickInside}
+              top={10}
+              left={0}
+              right={-5}
+              bottom={0}
+              bg="whiteAlpha.800"
+              boxShadow="xl"
+              zIndex={10}
+              direction="row"
+              onClick={handleOutsideClick}
             >
+              <Spacer />
               <MonthScheduleCard
                 icon={icon}
                 username={username}
                 schedule={[1, 2, 3]}
                 onClose={() => setSelectedCardIndex(null)}
               />
-            </Box>
+            </Flex>
           )}
           <VSpacer size={4} />
         </Box>
       ))}
-      <NavigationBar type={'Home'} />
+      <NavigationBar type="Home" />
     </>
   )
 }
