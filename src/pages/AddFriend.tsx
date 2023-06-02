@@ -1,13 +1,21 @@
 import { VSpacer } from 'Components/atoms/Spacer'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
-import { Input, InputGroup, InputRightAddon, VStack } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertIcon,
+  Input,
+  InputGroup,
+  InputRightAddon,
+  VStack,
+} from '@chakra-ui/react'
 import axios from 'axios'
 import { useState } from 'react'
 
 export const AddFriend = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleAddFriend = () => {
     // TODO: ホームからのmy_mailの値を設定する必要がある
@@ -18,6 +26,7 @@ export const AddFriend = () => {
       .get(url)
       .then((response) => {
         setEmail(email)
+        setSuccess(true)
         console.log(response)
       })
       .catch((error) => {
@@ -41,6 +50,18 @@ export const AddFriend = () => {
           />
           <InputRightAddon children="@gmail.com" bg="GrayText" />
         </InputGroup>
+        {error && (
+          <Alert status="error">
+            <AlertIcon />
+            データを送信できませんでした。
+          </Alert>
+        )}
+        {success && (
+          <Alert status="success">
+            <AlertIcon />
+            データを正常に送信しました。
+          </Alert>
+        )}
         <VSpacer size={64} />
         <SimpleButton
           type="add-friends"
@@ -48,7 +69,7 @@ export const AddFriend = () => {
           isShadow={false}
           clickFn={handleAddFriend}
         />
-        {error && <p>データを送信できませんでした。</p>}
+
         <NavigationBar type={'AddFriend'} />
       </VStack>
     </>
