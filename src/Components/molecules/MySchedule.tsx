@@ -6,8 +6,12 @@ import { WeekCalender } from 'Components/organisms/WeekCalender'
 type Props = {
   icon: string
   username: string
+  weekschedule: {
+    day: number
+    work: boolean[]
+  }[]
 }
-export const MySchedule = ({ icon, username }: Props) => {
+export const MySchedule = ({ icon, username, weekschedule }: Props) => {
   return (
     <HStack>
       <VStack>
@@ -16,7 +20,7 @@ export const MySchedule = ({ icon, username }: Props) => {
       </VStack>
 
       <Box flex="1">
-        <WeekCalender />
+        <WeekCalender schedule={weekschedule} />
       </Box>
       <HSpacer size={1} />
     </HStack>

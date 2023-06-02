@@ -17,7 +17,7 @@ import { WeekCalender } from 'Components/organisms/WeekCalender'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { ScheduleCard } from 'Components/templates/ScheduleCard'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
-import { MemberList, MonthSchedule } from 'Data/DummyData'
+import { MemberList, MonthSchedule, WeekTF } from 'Data/DummyData'
 import { MySchedule } from 'Components/molecules/MySchedule'
 import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
@@ -67,7 +67,11 @@ export const Components = () => {
           <Heading size="lg">organisms/MySchedule</Heading>
           <Card variant="filled">
             <CardBody>
-              <MySchedule icon={userdata.src} username={userdata.name} />
+              <MySchedule
+                icon={userdata.src}
+                username={userdata.name}
+                weekschedule={WeekTF}
+              />
             </CardBody>
           </Card>
 
@@ -82,6 +86,7 @@ export const Components = () => {
                 onClick={function (): void {
                   throw new Error('Function not implemented.')
                 }}
+                weekschedule={WeekTF}
               />
             </CardBody>
           </Card>
@@ -168,7 +173,7 @@ export const Components = () => {
           <Heading size="lg">organisms/WeekCalender</Heading>
           <Card variant="filled">
             <CardBody>
-              <WeekCalender />
+              <WeekCalender schedule={WeekTF} />
             </CardBody>
           </Card>
           {/* 追加のテンプレート：消さないでね！！ */}

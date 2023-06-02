@@ -1,8 +1,14 @@
 import { Text, Box, HStack, Stack } from '@chakra-ui/react'
 import { DayCell } from 'Components/atoms/DayCell'
-import { WeekTF } from 'Data/DummyData'
 
-export const WeekCalender = () => {
+type Props = {
+  schedule: {
+    day: number
+    work: boolean[]
+  }[]
+}
+
+export const WeekCalender = ({ schedule }: Props) => {
   return (
     <>
       <HStack>
@@ -17,7 +23,7 @@ export const WeekCalender = () => {
             24-
           </Text>
         </Stack>
-        {WeekTF.map((data) => (
+        {schedule.map((data) => (
           //TODO:縦の幅を調節する!何故か隙間が空く!!
           <Box key={data.day} width={`${100 / 7}%`}>
             <DayCell key={data.day} day={data.day} work={data.work} />
