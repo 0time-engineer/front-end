@@ -96,6 +96,24 @@ export const Home = () => {
       })
   }, [])
 
+  //自分の1週間情報
+  const [myWeek, setMyWeek] = useState<any>(null)
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/week_calender?my_id=${localStorage.getItem(
+          'user_id',
+        )}&user_id=${localStorage.getItem('user_id')}&filter=0`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        setMyWeek(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   return (
     <>
       {/* 自分のスケジュールのヘッダー */}
@@ -112,7 +130,7 @@ export const Home = () => {
           <MySchedule
             icon={myData === null ? '' : myData.picture}
             username={myData === null ? 'Loading...' : myData.name}
-            weekschedule={WeekTF}
+            weekschedule={myWeek === null ? [] : myWeek}
           />
         </Box>
       </Flex>
