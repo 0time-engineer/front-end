@@ -3,16 +3,27 @@ import { NavigationBar } from 'Components/atoms/NavigationBar'
 import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { Input, InputGroup, InputRightAddon, VStack } from '@chakra-ui/react'
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const AddFriend = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(false)
 
+  const location = useLocation()
+  useEffect(() => {
+    const search = location.search
+    const query = new URLSearchParams(search)
+    const queryUserId = query.get('user_id')
+    if (queryUserId != null) {
+      localStorage.setItem('user_id', queryUserId)
+    }
+  }, [])
+
   const handleAddFriend = () => {
     // TODO: ホームからのmy_mailの値を設定する必要がある
-    const url = `https://localhost:8080/add_friend?my_mail=${localStorage.getItem(
-      'my_mail',
+    const url = `http://localhost:8080/add_friend?my_mail=${localStorage.getItem(
+      'user_id',
     )}&friend_mail=${email}@gmail.com`
     axios
       .get(url)
