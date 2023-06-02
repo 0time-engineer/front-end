@@ -8,6 +8,7 @@ import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 import { WeekTF } from 'Data/DummyData'
+import { FilterButton } from 'Components/atoms/FilterButton'
 
 export const Home = () => {
   const location = useLocation()
@@ -116,6 +117,13 @@ export const Home = () => {
         </Box>
       </Flex>
       <VSpacer size={32} />
+      {/* TODO:フィルターボタン→ここでvalueが操作されると、フィルターが実装された方になるようにする */}
+      <FilterButton
+        filter={false}
+        setFilter={function (): void {
+          throw new Error('Function not implemented.')
+        }}
+      />
       {Array.from({ length: FriendList ? FriendList.length : 0 }).map(
         (_, index) => (
           <Box key={index} position="relative">
