@@ -8,12 +8,7 @@ import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 
-type Props = {
-  icon: string
-  username: string
-}
-
-export const Home = ({ icon, username }: Props) => {
+export const Home = () => {
   const location = useLocation()
   useEffect(() => {
     const search = location.search
@@ -26,10 +21,18 @@ export const Home = ({ icon, username }: Props) => {
 
   //クリックされたらカレンダー情報を取得
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false)
-  const [monthCalendar, setMonthCalendar] = useState<number[]>([])
+  const [monthScheduleInfo, setMonthScheduleInfo] = useState({
+    name: 'Loading',
+    icon: '',
+    schedule: [],
+  })
 
-  const handleScheduleCardClick = (user_id: string) => {
-    console.log('MonthCalendar: ' + user_id)
+  const handleScheduleCardClick = (
+    user_id: string,
+    icon: string,
+    name: string,
+  ) => {
+    console.log('monthSchedule: ' + user_id)
     axios
       .get(
         `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
@@ -37,8 +40,12 @@ export const Home = ({ icon, username }: Props) => {
         )}&user_id=${user_id}&filter=0`,
       )
       .then((response) => {
-        console.log('MonthCalendar: ' + response.data)
-        setMonthCalendar(response.data)
+        console.log('monthSchedule: ' + response.data)
+        setMonthScheduleInfo({
+          name: name,
+          icon: icon,
+          schedule: response.data,
+        })
       })
       .catch((error) => {
         console.log(error)
@@ -47,7 +54,7 @@ export const Home = ({ icon, username }: Props) => {
   }
 
   const handleOutsideClick = () => {
-    setMonthCalendar([])
+    setMonthScheduleInfo({ name: 'Loading', icon: '', schedule: [] })
     setIsCardSelected(false)
   }
 
@@ -114,7 +121,13 @@ export const Home = ({ icon, username }: Props) => {
             <ScheduleCard
               icon={FriendList[index].icon}
               username={FriendList[index].name}
-              onClick={() => handleScheduleCardClick(FriendList[index].user_id)}
+              onClick={() =>
+                handleScheduleCardClick(
+                  FriendList[index].user_id,
+                  FriendList[index].icon,
+                  FriendList[index].name,
+                )
+              }
             />
             {isCardSelected && (
               // 友達の月カレンダーの表示
@@ -132,9 +145,9 @@ export const Home = ({ icon, username }: Props) => {
               >
                 <Spacer />
                 <MonthScheduleCard
-                  icon={icon}
-                  username={username}
-                  schedule={monthCalendar}
+                  icon={monthScheduleInfo.icon}
+                  username={monthScheduleInfo.name}
+                  schedule={monthScheduleInfo.schedule}
                   onClose={() => setIsCardSelected(false)}
                 />
               </Flex>
