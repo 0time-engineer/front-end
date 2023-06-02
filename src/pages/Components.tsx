@@ -22,6 +22,7 @@ import { MySchedule } from 'Components/molecules/MySchedule'
 import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
 import { OneDayTimer } from 'Components/atoms/OneDayTimer'
+import { DayChangeButton } from 'Components/atoms/DayChangeButton'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -204,7 +205,7 @@ export const Components = () => {
             </CardBody>
           </Card>
 
-          {/* SimpleButton */}
+          {/* WeekCalender */}
           <VSpacer size={8} />
           <Heading size="lg">organisms/WeekCalender</Heading>
           <Card variant="filled">
@@ -212,6 +213,16 @@ export const Components = () => {
               <WeekCalender schedule={WeekTF} />
             </CardBody>
           </Card>
+
+          {/* DaychangeButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/DaychangeButton</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <DayChangeButton day={'3'} />
+            </CardBody>
+          </Card>
+
           {/* 追加のテンプレート：消さないでね！！ */}
 
           {/* --------------------*/}
