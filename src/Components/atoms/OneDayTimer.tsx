@@ -22,7 +22,7 @@ export const OneDayTimer = ({ oneDayList }: Props) => {
                 {clock.freeFlag ? (
                   <Box bg="#A6DFFF" w="200px" p={4}></Box>
                 ) : (
-                  <Box bg="white" w="200px" p={4}></Box>
+                  <Box bgColor="White" w="200px" p={4}></Box>
                 )}
               </HStack>
             </center>
