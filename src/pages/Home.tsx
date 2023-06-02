@@ -21,6 +21,12 @@ export const Home = () => {
     }
   }, [])
 
+  //フィルターの状態
+  const [filter, setFilter] = useState<boolean>(false)
+  function getZeroOne() {
+    return filter ? 1 : 0
+  }
+
   //クリックされたらカレンダー情報を取得
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false)
   const [monthScheduleInfo, setMonthScheduleInfo] = useState({
@@ -39,7 +45,7 @@ export const Home = () => {
       .get(
         `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
           'user_id',
-        )}&user_id=${user_id}&filter=0`,
+        )}&user_id=${user_id}&filter=${getZeroOne()}`,
       )
       .then((response) => {
         console.log('monthSchedule: ' + response.data)
@@ -135,13 +141,7 @@ export const Home = () => {
         </Box>
       </Flex>
       <VSpacer size={32} />
-      {/* TODO:フィルターボタン→ここでvalueが操作されると、フィルターが実装された方になるようにする */}
-      <FilterButton
-        filter={false}
-        setFilter={function (): void {
-          throw new Error('Function not implemented.')
-        }}
-      />
+      <FilterButton filter={filter} setFilter={setFilter} />
       {Array.from({ length: FriendList ? FriendList.length : 0 }).map(
         (_, index) => (
           <Box key={index} position="relative">
