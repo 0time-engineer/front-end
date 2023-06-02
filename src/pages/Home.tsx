@@ -24,16 +24,31 @@ export const Home = ({ icon, username }: Props) => {
     }
   }, [])
 
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null,
-  )
+  //クリックされたらカレンダー情報を取得
+  const [isCardSelected, setIsCardSelected] = useState<boolean>(false)
+  const [monthCalendar, setMonthCalendar] = useState<number[]>([])
 
-  const handleScheduleCardClick = (index: number) => {
-    setSelectedCardIndex(index === selectedCardIndex ? null : index)
+  const handleScheduleCardClick = (user_id: string) => {
+    console.log('MonthCalendar: ' + user_id)
+    axios
+      .get(
+        `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
+          'user_id',
+        )}&user_id=${user_id}&filter=0`,
+      )
+      .then((response) => {
+        console.log('MonthCalendar: ' + response.data)
+        setMonthCalendar(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    setIsCardSelected(true)
   }
 
   const handleOutsideClick = () => {
-    setSelectedCardIndex(null)
+    setMonthCalendar([])
+    setIsCardSelected(false)
   }
 
   //自分のデータを取得
@@ -87,7 +102,7 @@ export const Home = ({ icon, username }: Props) => {
         <Box width="100%">
           <MySchedule
             icon={myData === null ? '' : myData.picture}
-            username={myData === null ? 'Loading...' : myData.given_name}
+            username={myData === null ? 'Loading...' : myData.name}
           />
         </Box>
       </Flex>
@@ -99,9 +114,9 @@ export const Home = ({ icon, username }: Props) => {
             <ScheduleCard
               icon={FriendList[index].icon}
               username={FriendList[index].name}
-              onClick={() => handleScheduleCardClick(index)}
+              onClick={() => handleScheduleCardClick(FriendList[index].user_id)}
             />
-            {selectedCardIndex === index && (
+            {isCardSelected && (
               // 友達の月カレンダーの表示
               <Flex
                 position="fixed"
@@ -119,8 +134,8 @@ export const Home = ({ icon, username }: Props) => {
                 <MonthScheduleCard
                   icon={icon}
                   username={username}
-                  schedule={[1, 2, 3]}
-                  onClose={() => setSelectedCardIndex(null)}
+                  schedule={monthCalendar}
+                  onClose={() => setIsCardSelected(false)}
                 />
               </Flex>
             )}
