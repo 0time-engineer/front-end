@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
+import { WeekTF } from 'Data/DummyData'
 import { FilterButton } from 'Components/atoms/FilterButton'
 
 export const Home = () => {
@@ -111,6 +112,7 @@ export const Home = () => {
           <MySchedule
             icon={myData === null ? '' : myData.picture}
             username={myData === null ? 'Loading...' : myData.name}
+            weekschedule={WeekTF}
           />
         </Box>
       </Flex>
@@ -136,6 +138,7 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
+              weekschedule={WeekTF}
             />
             {isCardSelected && (
               // 友達の月カレンダーの表示
