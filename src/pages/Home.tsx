@@ -8,12 +8,7 @@ import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 
-type Props = {
-  icon: string
-  username: string
-}
-
-export const Home = ({ icon, username }: Props) => {
+export const Home = () => {
   const location = useLocation()
   useEffect(() => {
     const search = location.search
@@ -24,16 +19,43 @@ export const Home = ({ icon, username }: Props) => {
     }
   }, [])
 
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null,
-  )
+  //クリックされたらカレンダー情報を取得
+  const [isCardSelected, setIsCardSelected] = useState<boolean>(false)
+  const [monthScheduleInfo, setMonthScheduleInfo] = useState({
+    name: 'Loading',
+    icon: '',
+    schedule: [],
+  })
 
-  const handleScheduleCardClick = (index: number) => {
-    setSelectedCardIndex(index === selectedCardIndex ? null : index)
+  const handleScheduleCardClick = (
+    user_id: string,
+    icon: string,
+    name: string,
+  ) => {
+    console.log('monthSchedule: ' + user_id)
+    axios
+      .get(
+        `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
+          'user_id',
+        )}&user_id=${user_id}&filter=0`,
+      )
+      .then((response) => {
+        console.log('monthSchedule: ' + response.data)
+        setMonthScheduleInfo({
+          name: name,
+          icon: icon,
+          schedule: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    setIsCardSelected(true)
   }
 
   const handleOutsideClick = () => {
-    setSelectedCardIndex(null)
+    setMonthScheduleInfo({ name: 'Loading', icon: '', schedule: [] })
+    setIsCardSelected(false)
   }
 
   //自分のデータを取得
@@ -87,7 +109,7 @@ export const Home = ({ icon, username }: Props) => {
         <Box width="100%">
           <MySchedule
             icon={myData === null ? '' : myData.picture}
-            username={myData === null ? 'Loading...' : myData.given_name}
+            username={myData === null ? 'Loading...' : myData.name}
           />
         </Box>
       </Flex>
@@ -99,9 +121,15 @@ export const Home = ({ icon, username }: Props) => {
             <ScheduleCard
               icon={FriendList[index].icon}
               username={FriendList[index].name}
-              onClick={() => handleScheduleCardClick(index)}
+              onClick={() =>
+                handleScheduleCardClick(
+                  FriendList[index].user_id,
+                  FriendList[index].icon,
+                  FriendList[index].name,
+                )
+              }
             />
-            {selectedCardIndex === index && (
+            {isCardSelected && (
               // 友達の月カレンダーの表示
               <Flex
                 position="fixed"
@@ -117,10 +145,10 @@ export const Home = ({ icon, username }: Props) => {
               >
                 <Spacer />
                 <MonthScheduleCard
-                  icon={icon}
-                  username={username}
-                  schedule={[1, 2, 3]}
-                  onClose={() => setSelectedCardIndex(null)}
+                  icon={monthScheduleInfo.icon}
+                  username={monthScheduleInfo.name}
+                  schedule={monthScheduleInfo.schedule}
+                  onClose={() => setIsCardSelected(false)}
                 />
               </Flex>
             )}
