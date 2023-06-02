@@ -23,6 +23,8 @@ import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
 import { OneDayTimer } from 'Components/atoms/OneDayTimer'
 import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { OneDayParts } from 'Components/molecules/OneDayParts'
+import { MyIcon } from 'Components/atoms/MyIcon'
 import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Components = () => {
@@ -82,6 +84,15 @@ export const Components = () => {
             </CardBody>
           </Card>
 
+          {/* MyIcon */}
+          <VSpacer size={8} />
+          <Heading size="lg">MyIcon</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MyIcon icon={userdata.src} userName={userdata.name} />
+            </CardBody>
+          </Card>
+
           {/* NavigationBar */}
           <VSpacer size={8} />
           <Heading size="lg">NavigationBar</Heading>
@@ -109,6 +120,20 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 weekschedule={WeekTF}
+              />
+            </CardBody>
+          </Card>
+
+          {/* organisms/OneDayParts */}
+          <VSpacer size={8} />
+          <Heading size="lg">organisms/OneDayParts</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <OneDayParts
+                icon={userdata.src}
+                userName={userdata.name}
+                day={'3日'}
+                oneDayList={exampleDayList}
               />
             </CardBody>
           </Card>
@@ -229,7 +254,12 @@ export const Components = () => {
           <Heading size="lg">atomos/DayScheduleCard</Heading>
           <Card variant="filled">
             <CardBody>
-              <DayScheduleCard celectday={'3'} celectfriend={''} />
+              <DayScheduleCard
+                celectday={'3'}
+                celectfriendname={userdata.name}
+                daylist={exampleDayList}
+                celectfriendicon={userdata.src}
+              />
             </CardBody>
           </Card>
 
