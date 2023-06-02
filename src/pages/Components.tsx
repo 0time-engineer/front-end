@@ -23,6 +23,8 @@ import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
 import { OneDayTimer } from 'Components/atoms/OneDayTimer'
 import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { OneDayParts } from 'Components/molecules/OneDayParts'
+import { MyIcon } from 'Components/atoms/MyIcon'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -81,6 +83,15 @@ export const Components = () => {
             </CardBody>
           </Card>
 
+          {/* MyIcon */}
+          <VSpacer size={8} />
+          <Heading size="lg">MyIcon</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <MyIcon icon={userdata.src} userName={userdata.name} />
+            </CardBody>
+          </Card>
+
           {/* NavigationBar */}
           <VSpacer size={8} />
           <Heading size="lg">NavigationBar</Heading>
@@ -108,6 +119,20 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 weekschedule={WeekTF}
+              />
+            </CardBody>
+          </Card>
+
+          {/* organisms/OneDayParts */}
+          <VSpacer size={8} />
+          <Heading size="lg">organisms/OneDayParts</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <OneDayParts
+                icon={userdata.src}
+                userName={userdata.name}
+                day={'3日'}
+                oneDayList={exampleDayList}
               />
             </CardBody>
           </Card>
