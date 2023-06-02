@@ -59,7 +59,7 @@ export const AddFriend = () => {
         {success && (
           <Alert status="success">
             <AlertIcon />
-            データを正常に送信しました。
+            友達追加!
           </Alert>
         )}
         <VSpacer size={64} />
