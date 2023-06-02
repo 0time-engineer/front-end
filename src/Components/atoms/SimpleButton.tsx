@@ -21,7 +21,7 @@ export const SimpleButton = ({
   useEffect(() => {
     const link = document.createElement('link')
     link.href =
-      //TODO:apiのURL
+      // TODO: APIのURL　いらないかも
       link.rel = 'stylesheet'
     document.head.appendChild(link)
     return () => {
@@ -31,7 +31,7 @@ export const SimpleButton = ({
 
   return (
     <>
-      {/* ボタンのUI はここでいじる TODO:フォントや、ボタンの形などは後々入れる値をいじること */}
+      {/* ボタンのUIはここで調整します。TODO: フォントやボタンの形など、後で値を変更できるようにすること */}
       <Button
         bg="white"
         color="black"

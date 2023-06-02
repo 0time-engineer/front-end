@@ -6,15 +6,22 @@ type Props = {
 }
 
 export const Gmailwindow = ({ placeholder }: Props) => {
-  const [text, setText] = useState('')
+  const [email, setEmail] = useState('')
+
+  const handleInputChange = (event: { target: { value: any } }) => {
+    const value = event.target.value
+    setEmail(value)
+    // onValueChange(value) // 親コンポーネントにemailの値を渡す
+  }
 
   return (
     <>
       <InputGroup size="lg">
         <Input
-          value={text}
+          type="text"
+          value={email}
           placeholder={placeholder}
-          onChange={(event) => setText(event.target.value)}
+          onChange={handleInputChange}
         />
         <InputRightAddon children="@gmail.com" bg="GrayText" />
       </InputGroup>
