@@ -21,10 +21,37 @@ import { MemberList, MonthSchedule, WeekTF } from 'Data/DummyData'
 import { MySchedule } from 'Components/molecules/MySchedule'
 import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
+import { OneDayTimer } from 'Components/atoms/OneDayTimer'
 
 export const Components = () => {
   const userdata = MemberList[0]
   const [filter, setFilter] = useState<boolean>(false)
+  const exampleDayList = [
+    { hour: 0, freeFlag: true },
+    { hour: 1, freeFlag: true },
+    { hour: 2, freeFlag: true },
+    { hour: 3, freeFlag: true },
+    { hour: 4, freeFlag: true },
+    { hour: 5, freeFlag: true },
+    { hour: 6, freeFlag: true },
+    { hour: 7, freeFlag: true },
+    { hour: 8, freeFlag: true },
+    { hour: 9, freeFlag: true },
+    { hour: 10, freeFlag: true },
+    { hour: 11, freeFlag: true },
+    { hour: 12, freeFlag: false },
+    { hour: 13, freeFlag: false },
+    { hour: 14, freeFlag: false },
+    { hour: 15, freeFlag: false },
+    { hour: 16, freeFlag: false },
+    { hour: 17, freeFlag: true },
+    { hour: 18, freeFlag: true },
+    { hour: 19, freeFlag: true },
+    { hour: 20, freeFlag: true },
+    { hour: 21, freeFlag: true },
+    { hour: 22, freeFlag: true },
+    { hour: 23, freeFlag: true },
+  ]
   return (
     <>
       <VStack>
@@ -59,6 +86,15 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <NavigationBar type="Home" />
+            </CardBody>
+          </Card>
+
+          {/* OneDayTimer */}
+          <VSpacer size={8} />
+          <Heading size="lg">OneDayTimer</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <OneDayTimer oneDayList={exampleDayList} />
             </CardBody>
           </Card>
 
