@@ -3,17 +3,18 @@ import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { VSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import axios from 'axios'
+import { baseURL } from 'Data/baseURL'
 
 const getInfo = () => {
   axios
-    .get('http://localhost:8080/login')
+    .get(baseURL + 'login')
     .then((response) => {
       console.log(response.data)
     })
     .catch((error) => {
       console.log(error)
     })
-  window.location.href = 'http://localhost:8080/login'
+  window.location.href = baseURL + 'login'
 }
 
 export const Login = () => {

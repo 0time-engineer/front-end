@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { useState } from 'react'
+import { baseURL } from 'Data/baseURL'
 
 export const AddFriend = () => {
   const [email, setEmail] = useState('')
@@ -19,9 +20,11 @@ export const AddFriend = () => {
 
   const handleAddFriend = () => {
     // TODO: ホームからのmy_mailの値を設定する必要がある
-    const url = `http://localhost:8080/add_friend?my_mail=${localStorage.getItem(
-      'user_id',
-    )}&friend_mail=${email}@gmail.com`
+    const url =
+      baseURL +
+      `add_friend?my_id=${localStorage.getItem(
+        'user_id',
+      )}&friend_id=${email}@gmail.com`
     axios
       .get(url)
       .then((response) => {
