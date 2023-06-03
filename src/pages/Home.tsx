@@ -173,6 +173,7 @@ export const Home = () => {
             onClick={function (): void {
               throw new Error('Function not implemented.')
             }}
+            //ここエラー表示なくす
           />
         </Box>
       </Flex>
@@ -195,7 +196,6 @@ export const Home = () => {
               dayClick={handleDayClick}
               weekschedule={WeekTF}
             />
-
             {isCardSelected && (
               // 友達の月カレンダーの表示
               <Flex
@@ -219,7 +219,7 @@ export const Home = () => {
                 />
               </Flex>
             )}
-
+            //日のカレンダー表示
             {isDaySelected && (
               <Flex
                 position="fixed"
@@ -241,7 +241,6 @@ export const Home = () => {
                 />
               </Flex>
             )}
-
             <VSpacer size={4} />
           </Box>
         ),
