@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
-import { WeekTF } from 'Data/DummyData'
 import { FilterButton } from 'Components/atoms/FilterButton'
 
 export const Home = () => {
@@ -42,7 +41,7 @@ export const Home = () => {
         )}&user_id=${user_id}&filter=0`,
       )
       .then((response) => {
-        console.log('monthSchedule: ' + response.data)
+        // console.log('monthSchedule: ' + response.data)
         setMonthScheduleInfo({
           name: name,
           icon: icon,
@@ -70,7 +69,7 @@ export const Home = () => {
         )}`,
       )
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setMyData(response.data)
       })
       .catch((error) => {
@@ -88,7 +87,7 @@ export const Home = () => {
         )}`,
       )
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setFriendList(response.data)
       })
       .catch((error) => {
@@ -106,13 +105,39 @@ export const Home = () => {
         )}&user_id=${localStorage.getItem('user_id')}&filter=0`,
       )
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setMyWeek(response.data)
       })
       .catch((error) => {
         console.log(error)
       })
   }, [])
+
+  //フレンドの1週間情報
+  const [FriendWeek, setFriendWeek] = useState<any>([])
+  useEffect(() => {
+    if (FriendList !== null) {
+      let value: any[] = []
+      FriendList.forEach((element: any) => {
+        axios
+          .get(
+            `http://localhost:8080/week_calender?my_id=${localStorage.getItem(
+              'user_id',
+            )}&user_id=${element.user_id}&filter=0`,
+          )
+          .then((response) => {
+            console.log(response.data)
+            value.push(response.data)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        console.log(element.user_id)
+      })
+      setFriendWeek(value)
+      console.log(FriendWeek.length)
+    }
+  }, FriendList)
 
   return (
     <>
@@ -156,7 +181,7 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
-              weekschedule={WeekTF}
+              weekschedule={FriendWeek[index]}
             />
             {isCardSelected && (
               // 友達の月カレンダーの表示

@@ -3,6 +3,7 @@ import { Login } from './pages/Login'
 import { Home } from 'pages/Home'
 import { AddFriend } from 'pages/AddFriend'
 import { Components } from './pages/Components'
+import { Plactice } from 'test/plactice'
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="/AddFriend" element={<AddFriend />} />
           {/* コンポーネント確認用ページ */}
           <Route path="/components" element={<Components />} />
+          <Route path="/test" element={<Plactice />} />
         </Routes>
       </BrowserRouter>
     </>
