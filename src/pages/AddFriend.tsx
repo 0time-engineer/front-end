@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { useState } from 'react'
-import { baseURL } from 'Data/DummyData'
+import { baseURL } from 'Data/baseURL'
 
 export const AddFriend = () => {
   const [email, setEmail] = useState('')

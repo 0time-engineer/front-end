@@ -3,7 +3,7 @@ import { SimpleButton } from 'Components/atoms/SimpleButton'
 import { VSpacer } from 'Components/atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import axios from 'axios'
-import { baseURL } from 'Data/DummyData'
+import { baseURL } from 'Data/baseURL'
 
 const getInfo = () => {
   axios

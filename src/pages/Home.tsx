@@ -9,7 +9,7 @@ import { useLocation } from 'react-router'
 import axios from 'axios'
 import { WeekTF } from 'Data/DummyData'
 import { FilterButton } from 'Components/atoms/FilterButton'
-import { baseURL } from 'Data/DummyData'
+import { baseURL } from 'Data/baseURL'
 
 export const Home = () => {
   const location = useLocation()
