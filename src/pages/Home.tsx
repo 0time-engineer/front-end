@@ -13,6 +13,8 @@ import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Home = () => {
   const daydata = MemberList[0]
+  const [tapDay, setTapDay] = useState<string>('2023/05/29')
+  console.log(tapDay)
   const exampleDayList = [
     { hour: 0, freeFlag: true },
     { hour: 1, freeFlag: true },
@@ -44,11 +46,12 @@ export const Home = () => {
     const search = location.search
     const query = new URLSearchParams(search)
     const queryUserId = query.get('user_id')
+
     if (queryUserId != null) {
       localStorage.setItem('user_id', queryUserId)
     }
   }, [])
-  const [day, setDay] = useState<string>('2023/05/29')
+
   //フィルターの状態
   const [filter, setFilter] = useState<boolean>(false)
   function getZeroOne() {
@@ -90,7 +93,20 @@ export const Home = () => {
   }
 
   const [isDaySelected, setDaySelected] = useState<boolean>(false)
-  const handleDayClick = () => {
+  const handleDayClick = (user_id: string) => {
+    console.log(localStorage.getItem('user_id'))
+    console.log({ user_id }, { tapDay })
+    axios
+      .get(
+        `https://flasktest-1-x0448894.deta.app/day_calender?my_id=whitesheep0328@gmail.com&user_id=burasuto0777@gmail.com&filter=0&date=2023/06/04`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        //setDayFreeData(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     setDaySelected(true)
   }
 
@@ -165,6 +181,7 @@ export const Home = () => {
             icon={myData === null ? '' : myData.picture}
             username={myData === null ? 'Loading...' : myData.name}
             weekschedule={myWeek === null ? [] : myWeek}
+            setTapDay={setTapDay}
             onClick={function (): void {
               throw new Error('Function not implemented.')
             }}
@@ -181,6 +198,7 @@ export const Home = () => {
             <ScheduleCard
               icon={FriendList[index].icon}
               username={FriendList[index].name}
+              setTapDay={setTapDay}
               onClick={() =>
                 handleScheduleCardClick(
                   FriendList[index].user_id,
@@ -188,7 +206,7 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
-              dayClick={handleDayClick}
+              dayClick={() => handleDayClick(FriendList[index].user_id)}
               weekschedule={WeekTF}
             />
             {isCardSelected && (
@@ -228,8 +246,8 @@ export const Home = () => {
               >
                 <Spacer />
                 <DayScheduleCard
-                  celectday={day}
-                  setCelectday={setDay}
+                  celectday={tapDay}
+                  setCelectday={setTapDay}
                   celectfriendname={daydata.name}
                   daylist={exampleDayList}
                   celectfriendicon={daydata.src}

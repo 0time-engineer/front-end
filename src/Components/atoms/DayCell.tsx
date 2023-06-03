@@ -1,17 +1,19 @@
 import { Box, Center, Stack, Text } from '@chakra-ui/react'
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   day: number
   work: boolean[]
+  setTapDay: Dispatch<SetStateAction<string>>
   onClick: () => void
 }
 
-export const DayCell = ({ day, work, onClick }: Props) => {
+export const DayCell = ({ day, work, setTapDay, onClick }: Props) => {
   const today = new Date()
   const targetDate = new Date(today.setDate(today.getDate() + day))
-
-  // const year = today.getFullYear() // 年を取得
-  // const month = today.getMonth() + 1 // 月を取得（0から始まるため+1する）
+  let dayOne: string
+  const year = today.getFullYear() // 年を取得
+  const month = today.getMonth() + 1 // 月を取得（0から始まるため+1する）
 
   today.setDate(today.getDate() + day) // 指定した日数後の日付をセット
 
@@ -51,10 +53,27 @@ export const DayCell = ({ day, work, onClick }: Props) => {
       // それ以外の場合
       break
   }
+  if (month > 9) {
+    if (date > 9) {
+      dayOne = String(year) + '/' + String(month) + '/' + String(date)
+      console.log(dayOne)
+    } else {
+      dayOne = String(year) + '/' + String(month) + '/0' + String(date)
+      console.log(dayOne)
+    }
+  } else {
+    if (date > 9) {
+      dayOne = String(year) + '/0' + String(month) + '/' + String(date)
+      console.log(dayOne)
+    } else {
+      dayOne = String(year) + '/0' + String(month) + '/0' + String(date)
+      console.log(dayOne)
+    }
+  }
 
   return (
     <>
-      <Box onClick={onClick}>
+      <Box onClick={(setTapDay(dayOne), onClick)}>
         <Text
           color="gray"
           fontSize="xs"

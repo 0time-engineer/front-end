@@ -32,6 +32,7 @@ export const Components = () => {
   const userdata = MemberList[0]
   const [filter, setFilter] = useState<boolean>(false)
   const [day, setDay] = useState<string>('2023/05/29')
+  const [tapDay, setTapDay] = useState<string>('2023/05/29')
   const exampleDayList = [
     { hour: 0, freeFlag: true },
     { hour: 1, freeFlag: true },
@@ -122,6 +123,7 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 weekschedule={WeekTF}
+                setTapDay={setTapDay}
                 onClick={function (): void {
                   throw new Error('Function not implemented.')
                 }}
@@ -140,6 +142,7 @@ export const Components = () => {
                 day={'3日'}
                 oneDayList={exampleDayList}
               />
+              <Text>{tapDay}</Text>
             </CardBody>
           </Card>
 
@@ -151,6 +154,7 @@ export const Components = () => {
               <ScheduleCard
                 icon={userdata.src}
                 username={userdata.name}
+                setTapDay={setTapDay}
                 onClick={function (): void {
                   throw new Error('Function not implemented.')
                 }}
@@ -243,10 +247,12 @@ export const Components = () => {
             <CardBody>
               <WeekCalender
                 schedule={WeekTF}
+                setTapDay={setTapDay}
                 onClick={function (): void {
                   throw new Error('Function not implemented.')
                 }}
               />
+              <Text>tapday</Text>
             </CardBody>
           </Card>
 
