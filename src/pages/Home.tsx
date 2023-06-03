@@ -48,7 +48,7 @@ export const Home = () => {
       localStorage.setItem('user_id', queryUserId)
     }
   }, [])
-
+  const [day, setDay] = useState<string>('2023/05/29')
   //フィルターの状態
   const [filter, setFilter] = useState<boolean>(false)
   function getZeroOne() {
@@ -228,7 +228,8 @@ export const Home = () => {
               >
                 <Spacer />
                 <DayScheduleCard
-                  celectday={'3'}
+                  celectday={day}
+                  setCelectday={setDay}
                   celectfriendname={daydata.name}
                   daylist={exampleDayList}
                   celectfriendicon={daydata.src}

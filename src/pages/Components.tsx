@@ -275,7 +275,8 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <DayScheduleCard
-                celectday={'3'}
+                celectday={day}
+                setCelectday={setDay}
                 celectfriendname={userdata.name}
                 daylist={exampleDayList}
                 celectfriendicon={userdata.src}
