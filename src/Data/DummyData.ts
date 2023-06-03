@@ -2,6 +2,8 @@
 // ただし、何をどう変更したいのかをdiscodeで伝えて欲しいです
 // 他のコンポーネントで使用していることがあります
 
+export const baseURL = 'http://localhost:8080/'
+
 export const MemberList = [
   {
     address: 'abcde@gmail.com',

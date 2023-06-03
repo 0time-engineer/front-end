@@ -9,6 +9,7 @@ import { useLocation } from 'react-router'
 import axios from 'axios'
 import { WeekTF } from 'Data/DummyData'
 import { FilterButton } from 'Components/atoms/FilterButton'
+import { baseURL } from 'Data/DummyData'
 
 export const Home = () => {
   const location = useLocation()
@@ -43,9 +44,10 @@ export const Home = () => {
     console.log('monthSchedule: ' + user_id)
     axios
       .get(
-        `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
-          'user_id',
-        )}&user_id=${user_id}&filter=${getZeroOne()}`,
+        baseURL +
+          `month_calender?my_id=${localStorage.getItem(
+            'user_id',
+          )}&user_id=${user_id}&filter=${getZeroOne()}`,
       )
       .then((response) => {
         console.log('monthSchedule: ' + response.data)
@@ -70,11 +72,7 @@ export const Home = () => {
   const [myData, setMyData] = useState<any>(null)
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8080/user_detail?user_id=${localStorage.getItem(
-          'user_id',
-        )}`,
-      )
+      .get(baseURL + `user_detail?user_id=${localStorage.getItem('user_id')}`)
       .then((response) => {
         console.log(response.data)
         setMyData(response.data)
@@ -88,11 +86,7 @@ export const Home = () => {
   const [FriendList, setFriendList] = useState<any>(null)
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8080/friend_list?my_mail=${localStorage.getItem(
-          'user_id',
-        )}`,
-      )
+      .get(baseURL + `friend_list?my_mail=${localStorage.getItem('user_id')}`)
       .then((response) => {
         console.log(response.data)
         setFriendList(response.data)
@@ -107,9 +101,10 @@ export const Home = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/week_calender?my_id=${localStorage.getItem(
-          'user_id',
-        )}&user_id=${localStorage.getItem('user_id')}&filter=0`,
+        baseURL +
+          `week_calender?my_id=${localStorage.getItem(
+            'user_id',
+          )}&user_id=${localStorage.getItem('user_id')}&filter=0`,
       )
       .then((response) => {
         console.log(response.data)
