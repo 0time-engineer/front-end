@@ -120,6 +120,9 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 weekschedule={WeekTF}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             </CardBody>
           </Card>
@@ -150,6 +153,9 @@ export const Components = () => {
                   throw new Error('Function not implemented.')
                 }}
                 weekschedule={WeekTF}
+                dayClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             </CardBody>
           </Card>
@@ -233,7 +239,12 @@ export const Components = () => {
           <Heading size="lg">organisms/WeekCalender</Heading>
           <Card variant="filled">
             <CardBody>
-              <WeekCalender schedule={WeekTF} />
+              <WeekCalender
+                schedule={WeekTF}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
             </CardBody>
           </Card>
 

@@ -7,10 +7,38 @@ import { useState, useEffect } from 'react'
 import { MonthScheduleCard } from 'Components/templates/MonthScheduleCard'
 import { useLocation } from 'react-router'
 import axios from 'axios'
-import { WeekTF } from 'Data/DummyData'
+import { MemberList, WeekTF } from 'Data/DummyData'
 import { FilterButton } from 'Components/atoms/FilterButton'
+import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Home = () => {
+  const daydata = MemberList[0]
+  const exampleDayList = [
+    { hour: 0, freeFlag: true },
+    { hour: 1, freeFlag: true },
+    { hour: 2, freeFlag: true },
+    { hour: 3, freeFlag: true },
+    { hour: 4, freeFlag: true },
+    { hour: 5, freeFlag: true },
+    { hour: 6, freeFlag: true },
+    { hour: 7, freeFlag: true },
+    { hour: 8, freeFlag: true },
+    { hour: 9, freeFlag: true },
+    { hour: 10, freeFlag: true },
+    { hour: 11, freeFlag: true },
+    { hour: 12, freeFlag: false },
+    { hour: 13, freeFlag: false },
+    { hour: 14, freeFlag: false },
+    { hour: 15, freeFlag: false },
+    { hour: 16, freeFlag: false },
+    { hour: 17, freeFlag: true },
+    { hour: 18, freeFlag: true },
+    { hour: 19, freeFlag: true },
+    { hour: 20, freeFlag: true },
+    { hour: 21, freeFlag: true },
+    { hour: 22, freeFlag: true },
+    { hour: 23, freeFlag: true },
+  ]
   const location = useLocation()
   useEffect(() => {
     const search = location.search
@@ -59,6 +87,11 @@ export const Home = () => {
         console.log(error)
       })
     setIsCardSelected(true)
+  }
+
+  const [isDaySelected, setDaySelected] = useState<boolean>(false)
+  const handleDayClick = () => {
+    setDaySelected(true)
   }
 
   //自分のデータを取得
@@ -132,6 +165,10 @@ export const Home = () => {
             icon={myData === null ? '' : myData.picture}
             username={myData === null ? 'Loading...' : myData.name}
             weekschedule={myWeek === null ? [] : myWeek}
+            onClick={function (): void {
+              throw new Error('Function not implemented.')
+            }}
+            //ここエラー表示なくす
           />
         </Box>
       </Flex>
@@ -151,6 +188,7 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
+              dayClick={handleDayClick}
               weekschedule={WeekTF}
             />
             {isCardSelected && (
@@ -171,6 +209,29 @@ export const Home = () => {
                   icon={monthScheduleInfo.icon}
                   username={monthScheduleInfo.name}
                   schedule={monthScheduleInfo.schedule}
+                />
+              </Flex>
+            )}
+
+            {isDaySelected && (
+              //日のカレンダー表示
+              <Flex
+                position="fixed"
+                top={10}
+                left={0}
+                right={-5}
+                bottom={0}
+                bg="whiteAlpha.800"
+                boxShadow="xl"
+                zIndex={10}
+                direction="row"
+              >
+                <Spacer />
+                <DayScheduleCard
+                  celectday={'3'}
+                  celectfriendname={daydata.name}
+                  daylist={exampleDayList}
+                  celectfriendicon={daydata.src}
                 />
               </Flex>
             )}

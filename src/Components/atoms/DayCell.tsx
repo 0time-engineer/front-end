@@ -3,9 +3,10 @@ import { Box, Center, Stack, Text } from '@chakra-ui/react'
 type Props = {
   day: number
   work: boolean[]
+  onClick: () => void
 }
 
-export const DayCell = ({ day, work }: Props) => {
+export const DayCell = ({ day, work, onClick }: Props) => {
   const today = new Date()
   const targetDate = new Date(today.setDate(today.getDate() + day))
 
@@ -53,19 +54,26 @@ export const DayCell = ({ day, work }: Props) => {
 
   return (
     <>
-      <Text color="gray" fontSize="xs" style={dayStyles} borderRadius={'full'}>
-        <Center>{date}</Center>
-      </Text>
-      <Stack spacing={0}>
-        {work.map((value, index) => (
-          <Box
-            key={index}
-            width="100%"
-            height="2px"
-            bg={value ? '#A6DFFF' : 'white'}
-          />
-        ))}
-      </Stack>
+      <Box onClick={onClick}>
+        <Text
+          color="gray"
+          fontSize="xs"
+          style={dayStyles}
+          borderRadius={'full'}
+        >
+          <Center>{date}</Center>
+        </Text>
+        <Stack spacing={0}>
+          {work.map((value, index) => (
+            <Box
+              key={index}
+              width="100%"
+              height="2px"
+              bg={value ? '#A6DFFF' : 'white'}
+            />
+          ))}
+        </Stack>
+      </Box>
     </>
   )
 }

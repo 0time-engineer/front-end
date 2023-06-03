@@ -10,8 +10,14 @@ type Props = {
     day: number
     work: boolean[]
   }[]
+  onClick: () => void
 }
-export const MySchedule = ({ icon, username, weekschedule }: Props) => {
+export const MySchedule = ({
+  icon,
+  username,
+  weekschedule,
+  onClick,
+}: Props) => {
   return (
     <HStack>
       <VStack>
@@ -20,7 +26,7 @@ export const MySchedule = ({ icon, username, weekschedule }: Props) => {
       </VStack>
 
       <Box flex="1">
-        <WeekCalender schedule={weekschedule} />
+        <WeekCalender schedule={weekschedule} onClick={onClick} />
       </Box>
       <HSpacer size={1} />
     </HStack>

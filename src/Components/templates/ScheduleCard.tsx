@@ -9,6 +9,7 @@ type Props = {
     work: boolean[]
   }[]
   onClick: () => void
+  dayClick: () => void
 }
 
 export const ScheduleCard = ({
@@ -16,6 +17,7 @@ export const ScheduleCard = ({
   username,
   weekschedule,
   onClick,
+  dayClick,
 }: Props) => {
   return (
     <>
@@ -24,6 +26,7 @@ export const ScheduleCard = ({
           icon={icon}
           username={username}
           weekschedule={weekschedule}
+          onClick={dayClick}
         />
       </Card>
     </>
