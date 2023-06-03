@@ -23,6 +23,7 @@ export const DayScheduleCard = ({
   celectfriendicon,
   daylist,
 }: Props) => {
+  const day = celectday.slice(8, 10)
   //<ボタンをクリックしたら、homeボタンを再読み込みする
   const handleReturnButtonClick = () => {
     window.location.reload()
@@ -47,7 +48,7 @@ export const DayScheduleCard = ({
             <OneDayParts
               icon={celectfriendicon}
               userName={celectfriendname}
-              day={celectday}
+              day={day}
               oneDayList={daylist}
             />
             <TomorrowButton day={celectday} setDay={setCelectday} />

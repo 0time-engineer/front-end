@@ -15,13 +15,13 @@ type Props = {
 
 export const OneDayParts = ({ icon, userName, day, oneDayList }: Props) => {
   return (
-    <Card maxW="315px" boxShadow={'lg'} variant={'filled'}>
+    <Card maxW="90%" boxShadow={'lg'} variant={'filled'}>
       <HStack>
         <HSpacer size={1} />
         <MyIcon icon={icon} userName={userName} />
-        <HSpacer size={6} />
+
         <Text fontSize={40} color={'Green'}>
-          {day}
+          {day}日
         </Text>
       </HStack>
       <OneDayTimer oneDayList={oneDayList} />
