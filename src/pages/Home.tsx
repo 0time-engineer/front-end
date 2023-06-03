@@ -61,11 +61,6 @@ export const Home = () => {
     setIsCardSelected(true)
   }
 
-  const handleOutsideClick = () => {
-    setMonthScheduleInfo({ name: 'Loading', icon: '', schedule: [] })
-    setIsCardSelected(false)
-  }
-
   //自分のデータを取得
   const [myData, setMyData] = useState<any>(null)
   useEffect(() => {
@@ -170,14 +165,12 @@ export const Home = () => {
                 boxShadow="xl"
                 zIndex={10}
                 direction="row"
-                onClick={handleOutsideClick}
               >
                 <Spacer />
                 <MonthScheduleCard
                   icon={monthScheduleInfo.icon}
                   username={monthScheduleInfo.name}
                   schedule={monthScheduleInfo.schedule}
-                  onClose={() => setIsCardSelected(false)}
                 />
               </Flex>
             )}
