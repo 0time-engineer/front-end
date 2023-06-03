@@ -9,10 +9,10 @@ import {
 } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Gmailwindow } from 'Components/atoms/Gmailwindow'
-import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
+import { VSpacer, HSpacer } from 'Components//atoms/Spacer'
 import { TextBox } from 'Components/atoms/TextBox'
 import { NavigationBar } from 'Components/atoms/NavigationBar'
-import { SimpleButton } from 'Components/atoms/SimpleButton'
+import { SimpleButton } from 'Components//atoms/SimpleButton'
 import { WeekCalender } from 'Components/organisms/WeekCalender'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { ScheduleCard } from 'Components/templates/ScheduleCard'
@@ -22,13 +22,15 @@ import { MySchedule } from 'Components/molecules/MySchedule'
 import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
 import { OneDayTimer } from 'Components/atoms/OneDayTimer'
-import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { TomorrowButton } from 'Components/atoms/TomorrowButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 import { MyIcon } from 'Components/atoms/MyIcon'
+import { YesterdayButton } from 'Components/atoms/YesterdayButton'
 
 export const Components = () => {
   const userdata = MemberList[0]
   const [filter, setFilter] = useState<boolean>(false)
+  const [day, setDay] = useState<string>('2023/05/29')
   const exampleDayList = [
     { hour: 0, freeFlag: true },
     { hour: 1, freeFlag: true },
@@ -239,12 +241,22 @@ export const Components = () => {
             </CardBody>
           </Card>
 
-          {/* DaychangeButton */}
+          {/* TomorrowButton */}
           <VSpacer size={8} />
-          <Heading size="lg">atomos/DaychangeButton</Heading>
+          <Heading size="lg">atomos/TomorrowButton</Heading>
           <Card variant="filled">
             <CardBody>
-              <DayChangeButton day={'3'} />
+              <TomorrowButton day={day} setDay={setDay} />
+              <Text>選択日:{day}</Text>
+            </CardBody>
+          </Card>
+          {/* YesterdayButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/YesterdayButton</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <YesterdayButton day={day} setDay={setDay} />
+              <Text>選択日:{day}</Text>
             </CardBody>
           </Card>
 
