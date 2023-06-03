@@ -12,6 +12,7 @@ type Props = {
 }
 
 export const MonthScheduleCard = ({ icon, username, schedule }: Props) => {
+  //<ボタンクリックしたら、homeの再読み込みを実施する
   const handleButtonClick = () => {
     window.location.reload()
   }
