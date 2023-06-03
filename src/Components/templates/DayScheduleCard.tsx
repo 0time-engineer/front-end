@@ -4,6 +4,7 @@ import { YesterdayButton } from 'Components/atoms/YesterdayButton'
 import { ReturnButton } from 'Components/atoms/ReturnButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 import { Dispatch, SetStateAction } from 'react'
+import { VSpacer } from 'Components/atoms/Spacer'
 
 type Props = {
   celectday: string
@@ -23,6 +24,7 @@ export const DayScheduleCard = ({
   celectfriendicon,
   daylist,
 }: Props) => {
+  const day = celectday.slice(8, 10)
   //<ボタンをクリックしたら、homeボタンを再読み込みする
   const handleReturnButtonClick = () => {
     window.location.reload()
@@ -39,18 +41,22 @@ export const DayScheduleCard = ({
         >
           <HStack>
             <VStack>
-              <Flex position="relative" top={-400}>
+              <Flex position="relative" top={-300}>
                 <ReturnButton type={'left'} onClick={handleReturnButtonClick} />
               </Flex>
+
               <YesterdayButton day={celectday} setDay={setCelectday} />
             </VStack>
             <OneDayParts
               icon={celectfriendicon}
               userName={celectfriendname}
-              day={celectday}
+              day={day}
               oneDayList={daylist}
             />
-            <TomorrowButton day={celectday} setDay={setCelectday} />
+            <VStack>
+              <VSpacer size={10} />
+              <TomorrowButton day={celectday} setDay={setCelectday} />
+            </VStack>
           </HStack>
         </Card>
       </Container>
