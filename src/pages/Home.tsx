@@ -212,8 +212,9 @@ export const Home = () => {
                 />
               </Flex>
             )}
-            //日のカレンダー表示
+
             {isDaySelected && (
+              //日のカレンダー表示
               <Flex
                 position="fixed"
                 top={10}
