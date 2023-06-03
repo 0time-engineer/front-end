@@ -22,14 +22,16 @@ import { MySchedule } from 'Components/molecules/MySchedule'
 import { FilterButton } from 'Components/atoms/FilterButton'
 import { useState } from 'react'
 import { OneDayTimer } from 'Components/atoms/OneDayTimer'
-import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { TomorrowButton } from 'Components/atoms/TomorrowButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 import { MyIcon } from 'Components/atoms/MyIcon'
+import { YesterdayButton } from 'Components/atoms/YesterdayButton'
 import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Components = () => {
   const userdata = MemberList[0]
   const [filter, setFilter] = useState<boolean>(false)
+  const [day, setDay] = useState<string>('2023/05/29')
   const exampleDayList = [
     { hour: 0, freeFlag: true },
     { hour: 1, freeFlag: true },
@@ -248,12 +250,22 @@ export const Components = () => {
             </CardBody>
           </Card>
 
-          {/* DaychangeButton */}
+          {/* TomorrowButton */}
           <VSpacer size={8} />
-          <Heading size="lg">atomos/DaychangeButton</Heading>
+          <Heading size="lg">atomos/TomorrowButton</Heading>
           <Card variant="filled">
             <CardBody>
-              <DayChangeButton day={'3'} />
+              <TomorrowButton day={day} setDay={setDay} />
+              <Text>選択日:{day}</Text>
+            </CardBody>
+          </Card>
+          {/* YesterdayButton */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/YesterdayButton</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <YesterdayButton day={day} setDay={setDay} />
+              <Text>選択日:{day}</Text>
             </CardBody>
           </Card>
 
@@ -263,7 +275,8 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <DayScheduleCard
-                celectday={'3'}
+                celectday={day}
+                setCelectday={setDay}
                 celectfriendname={userdata.name}
                 daylist={exampleDayList}
                 celectfriendicon={userdata.src}

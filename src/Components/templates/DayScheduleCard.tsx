@@ -1,10 +1,13 @@
 import { Card, Container, Flex, HStack, VStack } from '@chakra-ui/react'
-import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { TomorrowButton } from 'Components/atoms/TomorrowButton'
+import { YesterdayButton } from 'Components/atoms/YesterdayButton'
 import { ReturnButton } from 'Components/atoms/ReturnButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   celectday: string
+  setCelectday: Dispatch<SetStateAction<string>>
   celectfriendname: string
   celectfriendicon: string
   daylist: {
@@ -15,6 +18,7 @@ type Props = {
 
 export const DayScheduleCard = ({
   celectday,
+  setCelectday,
   celectfriendname,
   celectfriendicon,
   daylist,
@@ -38,7 +42,7 @@ export const DayScheduleCard = ({
               <Flex position="relative" top={-400}>
                 <ReturnButton type={'left'} onClick={handleReturnButtonClick} />
               </Flex>
-              <DayChangeButton day={celectday} />
+              <YesterdayButton day={celectday} setDay={setCelectday} />
             </VStack>
             <OneDayParts
               icon={celectfriendicon}
@@ -46,7 +50,7 @@ export const DayScheduleCard = ({
               day={celectday}
               oneDayList={daylist}
             />
-            <DayChangeButton day={celectday} />
+            <TomorrowButton day={celectday} setDay={setCelectday} />
           </HStack>
         </Card>
       </Container>
