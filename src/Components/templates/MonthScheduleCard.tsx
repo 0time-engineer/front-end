@@ -3,15 +3,20 @@ import { HStack, VStack, Text } from '@chakra-ui/react'
 import { Image } from '@chakra-ui/react'
 import { MonthCalendar } from 'Components/organisms/MonthCalendar'
 import { VSpacer, HSpacer } from 'Components/atoms/Spacer'
+import { ReturnButton } from 'Components/atoms/ReturnButton'
 
 type Props = {
   icon: string
   username: string
   schedule: Array<number>
-  onClose: () => void
 }
 
 export const MonthScheduleCard = ({ icon, username, schedule }: Props) => {
+  //<ボタンクリックしたら、homeの再読み込みを実施する
+  const handleButtonClick = () => {
+    window.location.reload()
+  }
+
   return (
     <>
       <Container maxW="sm">
@@ -23,7 +28,9 @@ export const MonthScheduleCard = ({ icon, username, schedule }: Props) => {
         >
           <VStack>
             <VSpacer size={2} />
+
             <HStack>
+              <ReturnButton type={'left'} onClick={handleButtonClick} />
               <Image borderRadius="full" boxSize="28" src={icon} />
               <HSpacer size={2} />
               <Text fontSize="30px">{username}</Text>

@@ -6,9 +6,10 @@ type Props = {
     day: number
     work: boolean[]
   }[]
+  onClick: () => void
 }
 
-export const WeekCalender = ({ schedule }: Props) => {
+export const WeekCalender = ({ schedule, onClick }: Props) => {
   return (
     <>
       <HStack>
@@ -26,7 +27,12 @@ export const WeekCalender = ({ schedule }: Props) => {
         {schedule.map((data) => (
           //TODO:縦の幅を調節する!何故か隙間が空く!!
           <Box key={data.day} width={`${100 / 7}%`}>
-            <DayCell key={data.day} day={data.day} work={data.work} />
+            <DayCell
+              key={data.day}
+              day={data.day}
+              work={data.work}
+              onClick={onClick}
+            />
           </Box>
         ))}
       </HStack>
