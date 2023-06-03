@@ -25,6 +25,7 @@ import { OneDayTimer } from 'Components/atoms/OneDayTimer'
 import { DayChangeButton } from 'Components/atoms/DayChangeButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 import { MyIcon } from 'Components/atoms/MyIcon'
+import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -245,6 +246,20 @@ export const Components = () => {
           <Card variant="filled">
             <CardBody>
               <DayChangeButton day={'3'} />
+            </CardBody>
+          </Card>
+
+          {/* DayScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/DayScheduleCard</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <DayScheduleCard
+                celectday={'3'}
+                celectfriendname={userdata.name}
+                daylist={exampleDayList}
+                celectfriendicon={userdata.src}
+              />
             </CardBody>
           </Card>
 
