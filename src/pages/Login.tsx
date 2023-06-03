@@ -25,7 +25,7 @@ export const Login = () => {
       <Center>
         <Box bg="white" width="80%" boxShadow="2xl" rounded="xl">
           <VSpacer size={12} />
-          <TextBox text={'App'} />
+          <TextBox text={'∅pen Calendar'} />
           <VSpacer size={64} />
           <Center>
             <SimpleButton
