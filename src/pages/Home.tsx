@@ -86,7 +86,7 @@ export const Home = () => {
   const [FriendList, setFriendList] = useState<any>(null)
   useEffect(() => {
     axios
-      .get(baseURL + `friend_list?my_mail=${localStorage.getItem('user_id')}`)
+      .get(baseURL + `friend_list?my_id=${localStorage.getItem('user_id')}`)
       .then((response) => {
         console.log(response.data)
         setFriendList(response.data)

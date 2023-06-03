@@ -22,9 +22,9 @@ export const AddFriend = () => {
     // TODO: ホームからのmy_mailの値を設定する必要がある
     const url =
       baseURL +
-      `add_friend?my_mail=${localStorage.getItem(
+      `add_friend?my_id=${localStorage.getItem(
         'user_id',
-      )}&friend_mail=${email}@gmail.com`
+      )}&friend_id=${email}@gmail.com`
     axios
       .get(url)
       .then((response) => {
