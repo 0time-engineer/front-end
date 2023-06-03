@@ -230,9 +230,6 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 schedule={MonthSchedule}
-                onClose={function (): void {
-                  throw new Error('Function not implemented.')
-                }}
               />
             </CardBody>
           </Card>

@@ -1,5 +1,6 @@
-import { Card, Container, HStack } from '@chakra-ui/react'
+import { Card, Container, Flex, HStack, VStack } from '@chakra-ui/react'
 import { DayChangeButton } from 'Components/atoms/DayChangeButton'
+import { ReturnButton } from 'Components/atoms/ReturnButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 
 type Props = {
@@ -18,6 +19,11 @@ export const DayScheduleCard = ({
   celectfriendicon,
   daylist,
 }: Props) => {
+  //<ボタンをクリックしたら、homeボタンを再読み込みする
+  const handleReturnButtonClick = () => {
+    window.location.reload()
+  }
+
   return (
     <>
       <Container maxW="sm">
@@ -28,7 +34,12 @@ export const DayScheduleCard = ({
           borderRadius={'30px 0px 0px 30px'}
         >
           <HStack>
-            <DayChangeButton day={celectday} />
+            <VStack>
+              <Flex position="relative" top={-400}>
+                <ReturnButton type={'left'} onClick={handleReturnButtonClick} />
+              </Flex>
+              <DayChangeButton day={celectday} />
+            </VStack>
             <OneDayParts
               icon={celectfriendicon}
               userName={celectfriendname}
