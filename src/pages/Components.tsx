@@ -26,6 +26,7 @@ import { TomorrowButton } from 'Components/atoms/TomorrowButton'
 import { OneDayParts } from 'Components/molecules/OneDayParts'
 import { MyIcon } from 'Components/atoms/MyIcon'
 import { YesterdayButton } from 'Components/atoms/YesterdayButton'
+import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Components = () => {
   const userdata = MemberList[0]
@@ -121,6 +122,9 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 weekschedule={WeekTF}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             </CardBody>
           </Card>
@@ -151,6 +155,9 @@ export const Components = () => {
                   throw new Error('Function not implemented.')
                 }}
                 weekschedule={WeekTF}
+                dayClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
               />
             </CardBody>
           </Card>
@@ -225,9 +232,6 @@ export const Components = () => {
                 icon={userdata.src}
                 username={userdata.name}
                 schedule={MonthSchedule}
-                onClose={function (): void {
-                  throw new Error('Function not implemented.')
-                }}
               />
             </CardBody>
           </Card>
@@ -237,7 +241,12 @@ export const Components = () => {
           <Heading size="lg">organisms/WeekCalender</Heading>
           <Card variant="filled">
             <CardBody>
-              <WeekCalender schedule={WeekTF} />
+              <WeekCalender
+                schedule={WeekTF}
+                onClick={function (): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
             </CardBody>
           </Card>
 
@@ -257,6 +266,20 @@ export const Components = () => {
             <CardBody>
               <YesterdayButton day={day} setDay={setDay} />
               <Text>選択日:{day}</Text>
+            </CardBody>
+          </Card>
+
+          {/* DayScheduleCard */}
+          <VSpacer size={8} />
+          <Heading size="lg">atomos/DayScheduleCard</Heading>
+          <Card variant="filled">
+            <CardBody>
+              <DayScheduleCard
+                celectday={'3'}
+                celectfriendname={userdata.name}
+                daylist={exampleDayList}
+                celectfriendicon={userdata.src}
+              />
             </CardBody>
           </Card>
 
