@@ -52,7 +52,7 @@ export const NavigationBar = ({ type }: Props) => {
         h="64px"
         rounded={'none'}
         flex={1}
-        bg={ColorPresets.red[1]}
+        bg={ColorPresets.blue[1]}
         fontSize="35px"
         borderColor="#000000"
         borderBottomWidth={screen === type ? '5px' : '0px'}
