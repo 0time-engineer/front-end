@@ -20,7 +20,11 @@ export const OneDayTimer = ({ oneDayList }: Props) => {
                 </Box>
 
                 {clock.freeFlag ? (
-                  <Box bg="#A6DFFF" w="200px" p={4}></Box>
+                  <Box
+                    bg={localStorage.getItem('SeletdedPalette') || '#A6DFFF'}
+                    w="200px"
+                    p={4}
+                  ></Box>
                 ) : (
                   <Box bgColor="White" w="200px" p={4}></Box>
                 )}

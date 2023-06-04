@@ -47,6 +47,9 @@ export const Home = () => {
     if (queryUserId != null) {
       localStorage.setItem('user_id', queryUserId)
     }
+    if (localStorage.getItem('SelectedPalette') === null) {
+      localStorage.setItem('SelectedPalette', 'bule')
+    }
   }, [])
 
   //フィルターの状態
