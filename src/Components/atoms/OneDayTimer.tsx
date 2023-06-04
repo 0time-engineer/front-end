@@ -16,17 +16,13 @@ export const OneDayTimer = ({ oneDayList }: Props) => {
             <center>
               <HStack>
                 <Box w="50px">
-                  <Text fontSize={20}>{clock.hour}</Text>
+                  <Text fontSize={16}>{clock.hour}</Text>
                 </Box>
 
                 {clock.freeFlag ? (
-                  <Box
-                    bg={localStorage.getItem('SeletdedPalette') || '#A6DFFF'}
-                    w="200px"
-                    p={4}
-                  ></Box>
+                  <Box bg="#A6DFFF" w="75%" p={3}></Box>
                 ) : (
-                  <Box bgColor="White" w="200px" p={4}></Box>
+                  <Box bgColor="White" w="75%" p={3}></Box>
                 )}
               </HStack>
             </center>
