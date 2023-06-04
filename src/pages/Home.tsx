@@ -48,6 +48,9 @@ export const Home = () => {
     if (queryUserId != null) {
       localStorage.setItem('user_id', queryUserId)
     }
+    if (localStorage.getItem('SelectedPalette') === null) {
+      localStorage.setItem('SelectedPalette', 'bule')
+    }
   }, [])
   const [day, setDay] = useState<string>('2023/05/29')
   //フィルターの状態
