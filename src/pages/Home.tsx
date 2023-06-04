@@ -13,34 +13,10 @@ import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Home = () => {
   const daydata = MemberList[0]
+  const [isDaySelected, setDaySelected] = useState<boolean>(false)
   const [tapDay, setTapDay] = useState<string>('2023/05/29')
   console.log(tapDay)
-  const exampleDayList = [
-    { hour: 0, freeFlag: true },
-    { hour: 1, freeFlag: true },
-    { hour: 2, freeFlag: true },
-    { hour: 3, freeFlag: true },
-    { hour: 4, freeFlag: true },
-    { hour: 5, freeFlag: true },
-    { hour: 6, freeFlag: true },
-    { hour: 7, freeFlag: true },
-    { hour: 8, freeFlag: true },
-    { hour: 9, freeFlag: true },
-    { hour: 10, freeFlag: true },
-    { hour: 11, freeFlag: true },
-    { hour: 12, freeFlag: false },
-    { hour: 13, freeFlag: false },
-    { hour: 14, freeFlag: false },
-    { hour: 15, freeFlag: false },
-    { hour: 16, freeFlag: false },
-    { hour: 17, freeFlag: true },
-    { hour: 18, freeFlag: true },
-    { hour: 19, freeFlag: true },
-    { hour: 20, freeFlag: true },
-    { hour: 21, freeFlag: true },
-    { hour: 22, freeFlag: true },
-    { hour: 23, freeFlag: true },
-  ]
+
   const location = useLocation()
   useEffect(() => {
     const search = location.search
@@ -65,6 +41,11 @@ export const Home = () => {
     icon: '',
     schedule: [],
   })
+  const [dayInfo, setDayInfo] = useState({
+    name: 'Loading',
+    icon: '',
+    schedule: [],
+  })
 
   const handleScheduleCardClick = (
     user_id: string,
@@ -76,7 +57,7 @@ export const Home = () => {
       .get(
         `http://localhost:8080/month_calender?my_id=${localStorage.getItem(
           'user_id',
-        )}&user_id=${user_id}&filter=${getZeroOne()}`,
+        )}&user_id=${user_id}&filter=0s`,
       )
       .then((response) => {
         console.log('monthSchedule: ' + response.data)
@@ -91,18 +72,22 @@ export const Home = () => {
       })
     setIsCardSelected(true)
   }
-
-  const [isDaySelected, setDaySelected] = useState<boolean>(false)
-  const handleDayClick = (user_id: string) => {
-    console.log(localStorage.getItem('user_id'))
-    console.log({ user_id }, { tapDay })
+  //oneDayタップ時
+  const handleDayClick = (user_id: string, icon: string, name: string) => {
+    console.log({ user_id }, { icon }, { name })
     axios
       .get(
-        `https://flasktest-1-x0448894.deta.app/day_calender?my_id=whitesheep0328@gmail.com&user_id=burasuto0777@gmail.com&filter=0&date=2023/06/04`,
+        `https://openschedule-1-r7691628.deta.app/day_calender?my_id=${localStorage.getItem(
+          'user_id',
+        )}&user_id=${user_id}&filter=${getZeroOne()}&date=${tapDay}`,
       )
       .then((response) => {
         console.log(response.data)
-        //setDayFreeData(response.data)
+        setDayInfo({
+          name: user_id,
+          icon: icon,
+          schedule: response.data,
+        })
       })
       .catch((error) => {
         console.log(error)
@@ -115,7 +100,7 @@ export const Home = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/user_detail?user_id=${localStorage.getItem(
+        `https://openschedule-1-r7691628.deta.app/user_detail?user_id=${localStorage.getItem(
           'user_id',
         )}`,
       )
@@ -133,7 +118,7 @@ export const Home = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/friend_list?my_mail=${localStorage.getItem(
+        `https://openschedule-1-r7691628.deta.app/friend_list?my_mail=${localStorage.getItem(
           'user_id',
         )}`,
       )
@@ -151,7 +136,7 @@ export const Home = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/week_calender?my_id=${localStorage.getItem(
+        `https://openschedule-1-r7691628.deta.app/week_calender?my_id=${localStorage.getItem(
           'user_id',
         )}&user_id=${localStorage.getItem('user_id')}&filter=0`,
       )
@@ -206,7 +191,13 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
-              dayClick={() => handleDayClick(FriendList[index].user_id)}
+              dayClick={() =>
+                handleDayClick(
+                  FriendList[index].user_id,
+                  FriendList[index].icon,
+                  FriendList[index].name,
+                )
+              }
               weekschedule={WeekTF}
             />
             {isCardSelected && (
@@ -249,7 +240,7 @@ export const Home = () => {
                   celectday={tapDay}
                   setCelectday={setTapDay}
                   celectfriendname={daydata.name}
-                  daylist={exampleDayList}
+                  daylist={dayInfo.schedule}
                   celectfriendicon={daydata.src}
                 />
               </Flex>

@@ -6,14 +6,14 @@ import axios from 'axios'
 
 const getInfo = () => {
   axios
-    .get('http://localhost:8080/login')
+    .get('https://openschedule-1-r7691628.deta.app/login')
     .then((response) => {
       console.log(response.data)
     })
     .catch((error) => {
       console.log(error)
     })
-  window.location.href = 'http://localhost:8080/login'
+  window.location.href = 'https://openschedule-1-r7691628.deta.app/login'
 }
 
 export const Login = () => {
