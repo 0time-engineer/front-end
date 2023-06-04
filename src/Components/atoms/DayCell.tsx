@@ -88,7 +88,11 @@ export const DayCell = ({ day, work, setTapDay, onClick }: Props) => {
               key={index}
               width="100%"
               height="2px"
-              bg={value ? '#A6DFFF' : 'white'}
+              bg={
+                value
+                  ? localStorage.getItem('SeletdedPalette') || '#A6DFFF'
+                  : 'white'
+              }
             />
           ))}
         </Stack>

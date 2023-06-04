@@ -3,6 +3,7 @@ import { HiUserAdd, HiHome } from 'react-icons/hi'
 import { AiFillSetting } from 'react-icons/ai'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ColorPresets } from 'Data/ColorPreset'
 
 type Props = {
   type: 'Home' | 'AddFriend' | 'Setting'
@@ -33,6 +34,16 @@ export const NavigationBar = ({ type }: Props) => {
         icon = <AiFillSetting />
         break
     }
+    // var Palette = ['#FFFFFF', '#D8F1FF', '#A6DFFF']
+    // if (localStorage.getItem('SelectedPalette') !== null) {
+    //   Palette = localStorage.getItem('SeletdedPalet')
+    // }
+
+    // const selectcolor: string
+    // if(localStorage.getItem('SeletdedPalet') == null){
+    //    const selectcolor = "bule"
+    // }
+
     return (
       <IconButton
         aria-label={type}
@@ -41,7 +52,7 @@ export const NavigationBar = ({ type }: Props) => {
         h="64px"
         rounded={'none'}
         flex={1}
-        bg="#C2BEBE"
+        bg={ColorPresets.blue[1]}
         fontSize="35px"
         borderColor="#000000"
         borderBottomWidth={screen === type ? '5px' : '0px'}
@@ -68,7 +79,7 @@ export const NavigationBar = ({ type }: Props) => {
         <ContentButton type="Home" link="/Home" />
         <ContentButton type="AddFriend" link="/AddFriend" />
         {/* TODO: 設定画面への遷移に変更する */}
-        <ContentButton type="Setting" link="/Home" />
+        <ContentButton type="Setting" link="/Setting" />
       </Flex>
     </>
   )
