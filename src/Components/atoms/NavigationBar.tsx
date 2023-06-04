@@ -38,6 +38,12 @@ export const NavigationBar = ({ type }: Props) => {
     // if (localStorage.getItem('SelectedPalette') !== null) {
     //   Palette = localStorage.getItem('SeletdedPalet')
     // }
+
+    // const selectcolor: string
+    // if(localStorage.getItem('SeletdedPalet') == null){
+    //    const selectcolor = "bule"
+    // }
+
     return (
       <IconButton
         aria-label={type}
@@ -46,7 +52,7 @@ export const NavigationBar = ({ type }: Props) => {
         h="64px"
         rounded={'none'}
         flex={1}
-        bg={ColorPresets[selectedcolor][1]}
+        bg={ColorPresets.red[1]}
         fontSize="35px"
         borderColor="#000000"
         borderBottomWidth={screen === type ? '5px' : '0px'}
