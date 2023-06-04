@@ -1,1 +1,1 @@
-export const baseURL = 'https://flasktest-1-x0448894.deta.app/'
+export const baseURL = 'https://openschedule-1-r7691628.deta.app/'
