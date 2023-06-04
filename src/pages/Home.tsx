@@ -14,37 +14,16 @@ import { DayScheduleCard } from 'Components/templates/DayScheduleCard'
 
 export const Home = () => {
   const daydata = MemberList[0]
-  const exampleDayList = [
-    { hour: 0, freeFlag: true },
-    { hour: 1, freeFlag: true },
-    { hour: 2, freeFlag: true },
-    { hour: 3, freeFlag: true },
-    { hour: 4, freeFlag: true },
-    { hour: 5, freeFlag: true },
-    { hour: 6, freeFlag: true },
-    { hour: 7, freeFlag: true },
-    { hour: 8, freeFlag: true },
-    { hour: 9, freeFlag: true },
-    { hour: 10, freeFlag: true },
-    { hour: 11, freeFlag: true },
-    { hour: 12, freeFlag: false },
-    { hour: 13, freeFlag: false },
-    { hour: 14, freeFlag: false },
-    { hour: 15, freeFlag: false },
-    { hour: 16, freeFlag: false },
-    { hour: 17, freeFlag: true },
-    { hour: 18, freeFlag: true },
-    { hour: 19, freeFlag: true },
-    { hour: 20, freeFlag: true },
-    { hour: 21, freeFlag: true },
-    { hour: 22, freeFlag: true },
-    { hour: 23, freeFlag: true },
-  ]
+  const [isDaySelected, setDaySelected] = useState<boolean>(false)
+  const [tapDay, setTapDay] = useState<string>('2023/05/29')
+  console.log(tapDay)
+
   const location = useLocation()
   useEffect(() => {
     const search = location.search
     const query = new URLSearchParams(search)
     const queryUserId = query.get('user_id')
+
     if (queryUserId != null) {
       localStorage.setItem('user_id', queryUserId)
     }
@@ -52,7 +31,7 @@ export const Home = () => {
       localStorage.setItem('SelectedPalette', 'bule')
     }
   }, [])
-  const [day, setDay] = useState<string>('2023/05/29')
+
   //フィルターの状態
   const [filter, setFilter] = useState<boolean>(false)
   function getZeroOne() {
@@ -62,6 +41,11 @@ export const Home = () => {
   //クリックされたらカレンダー情報を取得
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false)
   const [monthScheduleInfo, setMonthScheduleInfo] = useState({
+    name: 'Loading',
+    icon: '',
+    schedule: [],
+  })
+  const [dayInfo, setDayInfo] = useState({
     name: 'Loading',
     icon: '',
     schedule: [],
@@ -93,9 +77,26 @@ export const Home = () => {
       })
     setIsCardSelected(true)
   }
-
-  const [isDaySelected, setDaySelected] = useState<boolean>(false)
-  const handleDayClick = () => {
+  //oneDayタップ時
+  const handleDayClick = (user_id: string, icon: string, name: string) => {
+    console.log({ user_id }, { icon }, { name })
+    axios
+      .get(
+        `https://openschedule-1-r7691628.deta.app/day_calender?my_id=${localStorage.getItem(
+          'user_id',
+        )}&user_id=${user_id}&filter=${getZeroOne()}&date=${tapDay}`,
+      )
+      .then((response) => {
+        console.log(response.data)
+        setDayInfo({
+          name: user_id,
+          icon: icon,
+          schedule: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     setDaySelected(true)
   }
 
@@ -163,6 +164,7 @@ export const Home = () => {
             icon={myData === null ? '' : myData.picture}
             username={myData === null ? 'Loading...' : myData.name}
             weekschedule={myWeek === null ? [] : myWeek}
+            setTapDay={setTapDay}
             onClick={function (): void {
               throw new Error('Function not implemented.')
             }}
@@ -179,6 +181,7 @@ export const Home = () => {
             <ScheduleCard
               icon={FriendList[index].icon}
               username={FriendList[index].name}
+              setTapDay={setTapDay}
               onClick={() =>
                 handleScheduleCardClick(
                   FriendList[index].user_id,
@@ -186,7 +189,13 @@ export const Home = () => {
                   FriendList[index].name,
                 )
               }
-              dayClick={handleDayClick}
+              dayClick={() =>
+                handleDayClick(
+                  FriendList[index].user_id,
+                  FriendList[index].icon,
+                  FriendList[index].name,
+                )
+              }
               weekschedule={WeekTF}
             />
             {isCardSelected && (
@@ -226,10 +235,10 @@ export const Home = () => {
               >
                 <Spacer />
                 <DayScheduleCard
-                  celectday={day}
-                  setCelectday={setDay}
+                  celectday={tapDay}
+                  setCelectday={setTapDay}
                   celectfriendname={daydata.name}
-                  daylist={exampleDayList}
+                  daylist={dayInfo.schedule}
                   celectfriendicon={daydata.src}
                 />
               </Flex>

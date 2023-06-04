@@ -1,15 +1,17 @@
 import { Text, Box, HStack, Stack } from '@chakra-ui/react'
 import { DayCell } from 'Components/atoms/DayCell'
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   schedule: {
     day: number
     work: boolean[]
   }[]
+  setTapDay: Dispatch<SetStateAction<string>>
   onClick: () => void
 }
 
-export const WeekCalender = ({ schedule, onClick }: Props) => {
+export const WeekCalender = ({ schedule, setTapDay, onClick }: Props) => {
   return (
     <>
       <HStack>
@@ -31,6 +33,7 @@ export const WeekCalender = ({ schedule, onClick }: Props) => {
               key={data.day}
               day={data.day}
               work={data.work}
+              setTapDay={setTapDay}
               onClick={onClick}
             />
           </Box>
